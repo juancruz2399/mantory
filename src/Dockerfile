@@ -1,18 +1,13 @@
-# Usa una imagen oficial de Java + Maven
-FROM maven:3.9.6-eclipse-temurin-17
-
-# Establece el directorio de trabajo
+# Usa una imagen oficial de Maven y JDK
+FROM maven:3.9.3-eclipse-temurin-17 AS build
 WORKDIR /app
-
-# Copia los archivos del proyecto
 COPY . .
+RUN mvn clean package -DskipTests
 
-# Compila y empaqueta la app
-RUN mvn clean install -DskipTests
-
-# Expone el puerto de tu app (ajústalo si usas otro en Spring Boot)
+# Usa JDK para ejecutar la app
+FROM eclipse-temurin:17-jdk
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
-
-# Comando para ejecutar la app
-CMD ["java", "-jar", "target/tu-app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
 
