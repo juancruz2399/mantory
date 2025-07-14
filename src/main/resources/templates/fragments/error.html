@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Algo salió mal</title>
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+  <div class="container mt-5 text-center">
+    <h1 class="display-4 text-danger">¡Error!</h1>
+    
+    <p class="lead">Ha ocurrido un problema al procesar tu solicitud.</p>
+
+    <div class="mt-4">
+      <p th:if="${status}" class="text-muted">Código de estado: <strong th:text="${status}">500</strong></p>
+      <p th:if="${error}" class="text-muted">Error: <strong th:text="${error}">Error Interno</strong></p>
+      <p th:if="${message}" class="text-muted">Mensaje: <strong th:text="${message}">Ocurrió un error inesperado.</strong></p>
+    </div>
+
+    <a href="/" class="btn btn-primary mt-3">Volver al inicio</a>
+  </div>
+</body>
+</html>

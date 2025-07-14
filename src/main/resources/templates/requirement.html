@@ -1,0 +1,1928 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title th:text = "'Requerimientos '"></title>
+	<style>
+    	.modal { overflow-y: auto !important; }
+    </style>
+    <!-- Custom fonts for this template-->
+   
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link th:href="@{/css/sb-admin-2.css}" rel="stylesheet">
+    <!-- Custom styles for this page -->
+    <link th:href="@{/css/dataTables.bootstrap4.min.css}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+   	<link rel="stylesheet" th:href="@{/font/bootstrap-icons.css}">
+	<link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet" />
+	<script th:src = "@{/js/chart.js}"></script>
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" th:href = "@{/home}">
+                <div class="sidebar-brand-icon rotate-n-15">
+               
+                    <div class="icon">
+				      <i class="bi bi-table"></i>
+				      
+				    </div>
+                </div>
+                <div class="sidebar-brand-text mx-3">CEROM</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span th:text = "'DAHSBOARD '"></span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Principales
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    
+				      <i class="bi bi-hospital-fill"></i>
+				      
+				
+                    <span>Obras</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Obras activas</h6>
+                       
+        
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="bi bi-pencil-square"></i>
+                    <span>Crear</span>
+                </a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                 
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Funciones adicionales
+
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Resumen mensual</span>
+                </a>
+                
+            </li>
+
+            <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="charts.html">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Gráficas</span></a>
+            </li>
+
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="tables.html">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Informes</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle">
+                </button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Search -->
+                    <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-success" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Search for..." aria-label="Search"
+                                            aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+
+                        <!-- Nav Item - Alerts -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell fa-fw"></i>
+                                <!-- Counter - Alerts -->
+                                <span class="badge badge-danger badge-counter">3+</span>
+                            </a>
+                            <!-- Dropdown - Alerts -->
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="alertsDropdown">
+                                <h6 class="dropdown-header">
+                                    Alerts Center
+                                </h6>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-primary">
+                                            <i class="fas fa-file-alt text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 12, 2019</div>
+                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-success">
+                                            <i class="fas fa-donate text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 7, 2019</div>
+                                        $290.29 has been deposited into your account!
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-warning">
+                                            <i class="fas fa-exclamation-triangle text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 2, 2019</div>
+                                        Spending Alert: We've noticed unusually high spending for your account.
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                            </div>
+                        </li>
+
+                        <!-- Nav Item - Messages -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-envelope fa-fw"></i>
+                                <!-- Counter - Messages -->
+                                <span class="badge badge-danger badge-counter">7</span>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="messagesDropdown">
+                                <h6 class="dropdown-header">
+                                    Message Center
+                                </h6>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                                            alt="...">
+                                        <div class="status-indicator bg-success"></div>
+                                    </div>
+                                    <div class="font-weight-bold">
+                                        <div class="text-truncate">Hi there! I am wondering if you can help me with a
+                                            problem I've been having.</div>
+                                        <div class="small text-gray-500">Emily Fowler · 58m</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
+                                            alt="...">
+                                        <div class="status-indicator"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">I have the photos that you ordered last month, how
+                                            would you like them sent to you?</div>
+                                        <div class="small text-gray-500">Jae Chun · 1d</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
+                                            alt="...">
+                                        <div class="status-indicator bg-warning"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">Last month's report looks great, I am very happy with
+                                            the progress so far, keep up the good work!</div>
+                                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
+                                            alt="...">
+                                        <div class="status-indicator bg-success"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
+                                            told me that people say this to all dogs, even if they aren't good...</div>
+                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                            </div>
+                        </li>
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                               
+                                <img class="img-profile rounded-circle"
+                                    src="img/undraw_profile.svg">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Perfil
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Configuraciones
+                                </a>
+                               
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Cerrar sesión
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800" th:text = "'COMPRAS '"></h1>
+                        
+                    </div>
+
+                    <!-- Content Row -->
+
+                    <div class="row">
+						 <div class="col-xl-12 col-lg-5">
+                            <div class="card shadow mb-4">
+								<div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-success">Cotizaciones por aprobar</h6>
+                                    <div class="dropdown no-arrow">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                            aria-labelledby="dropdownMenuLink">
+                                            <div class="dropdown-header">Dropdown Header:</div>
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+									<h5 class="mt-4">Órdenes de Compra Enviadas</h5>
+<div id="ordenes-group">
+  <!-- Bloque para GYJ Ferreterías -->
+  <div class="proveedor-orden mb-4" data-proveedor="GYJ Ferreterías">
+    <div class="d-flex justify-content-between align-items-center">
+      <h6>Proveedor: GYJ Ferreterías</h6>
+      <button class="btn btn-sm btn-outline-secondary">Enviar a correo</button>
+    </div>
+    <table class="table table-bordered table-sm mt-2">
+      <thead>
+        <tr>
+          <th># Orden</th>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Valor</th>
+          <th>Estado de Entrega</th>
+          <th>Seguimiento</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>OC-00123</td>
+          <td>Varilla 3/8</td>
+          <td>25</td>
+          <td>$1.500.000</td>
+          <td><span class="badge bg-warning text-dark">Pendiente</span></td>
+          <td>Esperando confirmación de entrega</td>
+          <td><button class="btn btn-sm btn-outline-primary">Ver</button></td>
+        </tr>
+        <tr>
+          <td>OC-00125</td>
+          <td>Cemento Gris</td>
+          <td>100</td>
+          <td>$3.200.000</td>
+          <td><span class="badge bg-success">Entregado</span></td>
+          <td>Entregado el 06/07</td>
+          <td><button class="btn btn-sm btn-outline-primary">Ver</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Bloque para Homecenter -->
+  <div class="proveedor-orden mb-4" data-proveedor="Homecenter">
+    <div class="d-flex justify-content-between align-items-center">
+      <h6>Proveedor: Homecenter</h6>
+      <button class="btn btn-sm btn-outline-secondary">Enviar a correo</button>
+    </div>
+    <table class="table table-bordered table-sm mt-2">
+      <thead>
+        <tr>
+          <th># Orden</th>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Valor</th>
+          <th>Estado de Entrega</th>
+          <th>Seguimiento</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>OC-00124</td>
+          <td>Barilla 1/2</td>
+          <td>10</td>
+          <td>$320.000</td>
+          <td><span class="badge bg-success">Entregado</span></td>
+          <td>Recepción confirmada 05/07</td>
+          <td><button class="btn btn-sm btn-outline-primary">Ver</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Bloque para Surtimateriales -->
+  <div class="proveedor-orden mb-4" data-proveedor="Surtimateriales">
+    <div class="d-flex justify-content-between align-items-center">
+      <h6>Proveedor: Surtimateriales</h6>
+      <button class="btn btn-sm btn-outline-secondary">Enviar a correo</button>
+    </div>
+    <table class="table table-bordered table-sm mt-2">
+      <thead>
+        <tr>
+          <th># Orden</th>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Valor</th>
+          <th>Estado de Entrega</th>
+          <th>Seguimiento</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>OC-00128</td>
+          <td>Malla electrosoldada</td>
+          <td>15</td>
+          <td>$890.000</td>
+          <td><span class="badge bg-danger">Atrasado</span></td>
+          <td>No se recibió al 07/07</td>
+          <td><button class="btn btn-sm btn-outline-primary">Ver</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+    <table class="table table-bordered table-sm mt-2">
+      <thead>
+        <tr>
+          <th># Orden</th>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Valor</th>
+          <th>Estado de Entrega</th>
+          <th>Seguimiento</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>OC-00123</td>
+          <td>Varilla 3/8</td>
+          <td>25</td>
+          <td>$1.500.000</td>
+          <td><span class="badge bg-warning text-dark">Pendiente</span></td>
+          <td>Esperando confirmación de entrega</td>
+          <td><button class="btn btn-sm btn-outline-primary">Ver</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="proveedor-orden mt-4" data-proveedor="Homecenter">
+    <div class="d-flex justify-content-between align-items-center">
+      <h6>Proveedor: Homecenter</h6>
+      <button class="btn btn-sm btn-outline-secondary">Enviar a correo</button>
+    </div>
+    <table class="table table-bordered table-sm mt-2">
+      <thead>
+        <tr>
+          <th># Orden</th>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Valor</th>
+          <th>Estado de Entrega</th>
+          <th>Seguimiento</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>OC-00124</td>
+          <td>Barilla 1/2</td>
+          <td>10</td>
+          <td>$320.000</td>
+          <td><span class="badge bg-success">Entregado</span></td>
+          <td>Recepción confirmada 05/07</td>
+          <td><button class="btn btn-sm btn-outline-primary">Ver</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+                                </div>
+                            </div>
+                         </div>
+                        <!-- Area Chart -->
+                        <div class="col-xl-12 col-lg-5">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-success">Cotizaciones por aprobar</h6>
+                                    <div class="dropdown no-arrow">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                            aria-labelledby="dropdownMenuLink">
+                                            <div class="dropdown-header">Dropdown Header:</div>
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                 <div class = "col-md-10 justify-content-between">
+										 <button type="button" id = "compararButton"class="btn btn-success shadow-sm" data-bs-toggle="modal" > Comparar</button>
+	                                
+									 </div>
+									 <hr>
+                                        <div class="table-responsive">
+					            			<table class="table table-bordered" width="100%" cellspacing="0">
+						            			<thead class = "table-success">
+						            				<tr>
+														<th scope = "col">Id</th>
+						            					<th scope = "col">Concepto</th>
+						            					<th scope = "col">Tipo</th>
+						            					<th scope = "col">Cantidad</th>
+						            					<th scope = "col">Unidad</th>
+						            					<th scope = "col">Usuario </th>
+						            					<th scope = "col">Comparar</th>
+						            					<th scope = "col">Cotización </th>
+						            	
+						            				</tr>
+						            			</thead>
+						            			<tbody>
+						            				<tr th:each="requerimiento,iterador:${requerimientos}">
+														<td th:text="${requerimiento.id_Requirement}"></td>
+														<td th:text="${requerimiento.Nombre_requerimiento}"></td>
+														<td th:text="${requerimiento.Tipo_requerimiento_compra}"></td>
+														<td th:text="${requerimiento.Cantidad}"></td>
+														<td th:text="${requerimiento.Unidad_requerimiento}"></td>
+														<td th:text="${requerimiento.user.Nombre}"></td>
+														<td>
+															<input type="checkbox" th:name="compararcot" th:value = "${requerimiento.id_Requirement}" class="form-control-user">
+														</td>
+														<td>
+															
+														
+															<div class="input-group">
+																 <input type="text" th:id = "'numCot'+${requerimiento.id_Requirement}" name ="inputOrdenes" class="form-control form-control-user"
+											                                            placeholder="Numero">
+																<button type="button" th:id="'anadirOtraCot'+${requerimiento.id_Requirement}" name = "otrasCotizaciones" onclick="completar(this)"  class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" data-bs-toggle="modal" th:attr="data-bs-target='#staticBackdrocot2'+${requerimiento.id_Requirement}"> Añadir</button>
+							                               
+															</div>
+															
+															
+              
+														      <!-- Modal -->
+														      <div class="modal" th:id="'staticBackdropCots'"  data-bs-keyboard="false" tabindex="-1"  aria-hidden="true">
+														        <div class="modal-dialog modal-xl">
+														          <div class="modal-content">
+														            <div class="modal-header">
+														              <h5 class="modal-title" id="comparetitle">Comparación de cotizaciones</h5>
+														              <button type="button" id = "xmodalcots" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+														            </div>
+														            <div class="modal-body">
+																		<form  th:action = "@{/nuevaoc/}+${idObra}"enctype = "multipart/form-data" method="post"validate>
+																		<div class="table-responsive" id = "comparativo">
+													            		
+													            			
+													            		</div>
+													            		
+													            		
+													            		<div class ="table-responsive" id="feedbackSelect">
+																			<table id="tablaResumenCompras" class="table table-bordered">
+																	          <thead>
+																	            <tr>
+																	              <th>Producto</th><th>Proveedor</th>
+																	              <th>Cantidad</th><th>Valor total</th>
+																	            </tr>
+																	          </thead>
+																	          <tbody></tbody>
+																	        </table>
+																		</div>
+																		<hr>
+																		<div class= "col-md-10 justify-content-between">
+																			<label class = "form-control-user"
+																			> Observaciones</label>
+																			<textarea class="form-control form-control-user"  type="text"></textarea>
+																			
+
+																		</div>
+																		<hr>
+													            		<button type = "submit" class="btn btn-success btn-user btn-block">
+											                                    Enviar para aprobación
+											                                </button>
+														             	</form>
+														                
+														               
+														              </div>
+														         
+														            <div class="modal-footer">
+														              <button type="button" id = "closemodalcots"class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+														                                         
+														            </div>
+														          </div>
+														        </div>
+														      </div>
+														      <div class="modal" th:id="'staticBackdrocot2'+${requerimiento.id_Requirement}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+																					      
+												                <div class="modal-dialog modal-xl"role="document">
+												                  <div class="modal-content">
+												                    <div class="modal-header">
+												                      <h5 class="modal-title" > Añadir cotización</h5>
+												                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+												                    </div>
+												                    <div class="modal-body">
+																		<div class ="form-group row">
+																		<div class="col-md-3">
+												                            <div class="bd-example">
+												                            <ul class="list-group list-group-flush">
+												                              <li class="list-group-item">Requerimiento</li>
+												                              <li class="list-group-item">Fecha</li>
+												                              <li class="list-group-item">Usuario</li>
+												                              <li class="list-group-item">Parametrización</li>
+												          
+												                            </ul>
+												                            </div>                            
+												                          </div>
+												                          <div class="col-md-3">
+												                            <div class="bd-example">
+												                            <ul class="list-group ">
+												                              <li class="list-group-item" th:text="${requerimiento.id_Requirement}"></li>
+												                              <li class="list-group-item" th:text="${requerimiento.Fecha_requerimiento}"></li>
+												                              <div th:if="${requerimiento.usuario}">
+																					<li class="list-group-item" th:text="${requerimiento.usuario.Nombre}"></li>
+																			  </div>
+												                              <div th:unless="${requerimiento.usuario}">
+																				  <li class="list-group-item" ></li>
+												                              </div>
+												                              <li class="list-group-item" th:text="${requerimiento.Tipo_requerimiento}"></li>
+												                      
+												                            </ul>
+												                            </div>                            
+												                          </div>
+												                          <div class="col-md-3">
+												                            <div class="bd-example">
+												                            <ul class="list-group list-group-flush">
+												                              <li class="list-group-item">Nombre requerimiento</li>
+												                              <li class="list-group-item">Tipo requerimiento</li>
+												                              <li class="list-group-item">Unidad medida</li>
+												                              <li class="list-group-item">Cantidad solicitada</li>
+												          
+												                            </ul>
+												                            </div>                            
+												                          </div>
+												                          <div class="col-md-3">
+												                            <div class="bd-example">
+												                            <ul class="list-group ">
+												                              <li class="list-group-item" th:text="${requerimiento.Nombre_requerimiento}"></li>
+												                              <li class="list-group-item" th:text="${requerimiento.Tipo_requerimiento_compra}"></li>
+												                              <li class="list-group-item" th:text="${requerimiento.Unidad_requerimiento}"></li>
+												                            
+												                              <li class="list-group-item" th:text="${requerimiento.Cantidad}"></li>
+												                      
+												                            </ul>
+												                            </div>                            
+												                          </div>
+																		</div>
+																		<hr>
+												                    	<form class="user needs-validation" th:action = "@{/nuevacotizacion/}+${requerimiento.id_Requirement}"th:object="${cotizacion}"enctype = "multipart/form-data" method="post"validate>
+												                    		<div class="form-group row">
+											                                    <div class="col-sm-3 mb-3 mb-sm-0">
+											                                        <input type="text"th:field="*{Articulo}" th:id = "'articuloCot'+${requerimiento.id_Requirement}" class="form-control form-control-user"
+											                                            placeholder="Articulo">
+											                                    </div>
+											                                    <div class="col-sm-3">
+											                                        <input type="text"th:field="*{Condiciones_pago}" th:id="'condicionesPagoCot'+${requerimiento.id_Requirement}" class="form-control form-control-user" 
+											                                            placeholder="Condiciones de pago">
+											                                    </div>
+											                                    
+											                                    <div class="col-sm-3">
+																					<select class="form-control" th:name = "proveedor"th:id = "'provCot'+${requerimiento.id_Requirement}" placeholder="Proveedor" required>
+																		              	<option selected disabled value="0">Elige el proveedor</option>
+																		              	<div th:each="proveedor:${proveedores}">
+																		              		<option th:text="${proveedor.Nombre_proveedor}" th:value = "${proveedor.id_Provider}"></option>
+																		              	</div>
+																						 
+																						</select>
+											                                    </div>
+											                                    <div class="col-sm-3">
+											                                        <input type="text"th:field="*{Observacion}" th:id = "'observacionCot'+${requerimiento.id_Requirement}" class="form-control form-control-user" 
+											                                            placeholder="Observaciones">
+											                                    </div>
+											                                   
+												                    		</div>
+												                    		<div class = "form-group row">
+											                                    <div class="col-sm-3">
+																					<medium class="text-gray-550">Fecha de cotización</medium>
+											                                       
+																					<input type="date"th:name="fecha_cotizacion" th:id = "'fechaCot'+${requerimiento.id_Requirement}"class="form-control form-control-user">
+											                                    </div>
+											                                    <div class="col-sm-2">
+																					<medium class="text-gray-550">Plazo de entrega(días)</medium>
+											                                        <input type="number"  min = "0" th:id = "'plazoEntregaCot'+${requerimiento.id_Requirement}" th:field="*{Plazo_entrega}" class="form-control form-control-user" 
+											                                            placeholder="Unidad">
+											                                    </div>
+											                                    <div class="col-sm-2">
+																					<medium class="text-gray-550">Vigencia</label>
+											                                        <input type="number"  min = "0" th:id = "'vigenciaCot'+${requerimiento.id_Requirement}" th:field="*{vigencia_cotizacion}" class="form-control form-control-user" 
+											                                            placeholder="Unidad">
+											                                    </div>
+											                                    <div class="col-sm-1">
+																					<medium class="text-gray-550">Incluye flete</label>
+											                                        <input type="checkbox"th:field="*{Flete}" th:id ="'fleteCot'+${requerimiento.id_Requirement}" class="form-control form-control-user" 
+											                                            placeholder="Unidad">
+											                                    </div>
+											                                    <div class="col-sm-1">
+																					<medium class="text-gray-550">Cumple especificacion</label>
+											                                        <input type="checkbox"th:field="*{Cumple_especificacion}" th:id = "'cumpleEspecificacionCot'+${requerimiento.id_Requirement}"class="form-control form-control-user" 
+											                                            placeholder="Unidad">
+											                                    </div>
+											                                    <div class ="col-sm-2">
+																					<medium class="text-gray-550">Numero de cotización</label>
+											                                        <input type="text"th:field="*{Numero_cotizacion}" th:id = "'numeroCot'+${requerimiento.id_Requirement}"class="form-control form-control-user" 
+											                                            placeholder="Unidad">
+																					
+																					
+																				</div>
+											                                </div>
+											                 				<hr>
+											                 				<label class ="text-gray-600">Valores económicos</label>
+											                                <div class = "form-group row">
+											                                	 <div class="col-sm-3">
+																					<medium class="text-gray-550">Valor unitario</label>
+											                                        <input type="number" th:id = "'valorUnitario'+${requerimiento.id_Requirement}" min = "0" step = "1"th:field="*{Valor_unitario}" class="form-control form-control-user" 
+											                                            placeholder="Unidad">
+                      	
+											                                    </div>
+											                                    <div class="col-sm-3">
+																				
+																						<small class="text-gray-550">Cantidad cotizada</small>      	
+											                                        	<input type="number" th:id = "'cantidadCot'+${requerimiento.id_Requirement}" min="0" th:field="*{Cantidad}" class="form-control form-control-user" >
+																			  
+											                                    </div>
+											                                    <div class="col-sm-3">
+																				
+																						<small class="text-gray-550">IVA</small>      	
+											                                        	<select class="form-control" th:id ="'IVACot'+${requerimiento.id_Requirement}" placeholder="Proveedor" required>
+																		              	<option selected disabled value="0">IVA</option>
+																		              	
+																		              	<option  value = 0>0</option>
+																		              	<option  value = 5>5</option>
+																		              	<option  value = 19>19</option>
+																		              
+																						 
+																						</select>
+											                                    </div>
+											                                    <div class="col-sm-3">
+																				
+																						<small class="text-gray-550">Total</small>      	
+											                                        	<input type="number" min="0" th:id = "'totalCot'+${requerimiento.id_Requirement}"th:field="*{Valor}" class="form-control form-control-user" >
+																			
+											                                    </div>
+											                                </div>
+											                                <div class = "form-group row">
+											                                  
+											                                	<div class="col-sm-12 mb-3 mb-sm-0">
+											                                		<button type = "submit" class="btn btn-success btn-user btn-block">
+													                                    Guardar
+													                                </button>
+											                                	</div>
+											                                	
+											                                
+											                                </div>
+												                    	</form>
+												                    	
+			
+																			
+																					
+																					
+												                   
+															    	
+												                        
+												                    </div>
+												                    <div class="modal-footer">
+												                      <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cerrar</button>
+												                                                
+												                    
+												                  </div>
+												                </div>
+												             </div>
+															</div>
+														</td>
+						            				</tr>
+						            				
+						            			</tbody>
+					            			</table>
+					            		</div>
+                             			
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-5">
+							<div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-success">Requerimientos solicitados</h6>
+                                    <div class="dropdown no-arrow">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                            aria-labelledby="dropdownMenuLink">
+                                            <div class="dropdown-header">Dropdown Header:</div>
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+									
+									
+								 <div class="row g-3 mb-3">
+									 <div class = "col-md-10 justify-content-between">
+										 <button type="button" class="btn btn-success shadow-sm" data-bs-toggle="modal" th:attr="data-bs-target='#staticBackdropreq'"> Nuevo requerimiento</button>
+	                                
+									 </div>
+								 	 <div class = "col-md-2 order-md-last">
+	                                 	<button type="button" class="btn btn-success shadow-sm" data-bs-toggle="modal" th:attr="data-bs-target='#staticBackdropprov'"> Cotizar</button>
+	                                 </div>
+								 </div>	
+                                 <div class="modal" th:id="'staticBackdropprov'" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+														      
+					                <div class="modal-dialog modal-xl"role="document">
+					                  <div class="modal-content">
+					                    <div class="modal-header">
+					                      <h5 class="modal-title" > Elegir proveedores</h5>
+					                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					                    </div>
+					                    <div class="modal-body">
+					                    	<form class="user needs-validation" th:action = "@{/nuevorequerimiento/}+${Institution.id_Institution}"enctype = "multipart/form-data" method="post"validate>
+					                    		<div class="form-group row">
+				                                    <div class="col-sm-8 mb-3 mb-sm-0">
+				                                        <div class="table-responsive">
+															
+					            							<table class="table table-bordered" id = "proveedorTable" width="100%" cellspacing="0">
+						            							<thead class = "table-success">
+										            				<tr>
+																		
+										            					<th scope = "col">Nombre</th>
+										            					<th scope = "col">Tipo</th>
+										            					<th scope = "col">Municipio</th>
+										            					<th scope = "col">Puntuación</th>
+										            					<th scope = "col">Telefono </th>
+										            					<th scope ="col"> Cotizar</th>
+										            					
+										            				</tr>
+										            			</thead>
+										            			<tbody>
+										            				<tr th:each="proveedor,iterador:${proveedores}">
+																		
+																		<td th:text="${proveedor.Nombre_proveedor}"></td>
+																		<td th:text ="${proveedor.Tipo_proveedor}"></td>
+																		
+																		<td th:text="${proveedor.Municipio}"></td>
+																		<td th:text="${proveedor.Puntuacion}"></td>
+																		<td th:text="${proveedor.Celular_proveedor}"></td>
+																		<td>
+																			<input type="checkbox" th:name="provtocot" class="form-control-user">
+																		</td>
+										            				</tr>
+										            			</tbody>
+					            							</table>
+				                                        </div>
+				                                    </div>
+				                                    <div class="col-sm-4">
+														<div class = "table-responsive">
+															<table class"table" >
+																<thead>
+																	<tr>
+																		<th scope ="col">Concepto</th>
+																		<th scope = "col">Cantidad</th>
+																	</tr>
+																</thead>
+																<tbody th:id = "tablecot">
+																	
+																</tbody>
+															
+															</table>
+															
+														</div>
+				                                       </div>
+				                                   
+					                    		</div>
+					                    	
+				                 
+				                                <div class = "form-group row">
+				                                
+				                                	<div class="col-sm-12 mb-3 mb-sm-0">
+				                                		<button type = "submit" class="btn btn-success btn-user btn-block">
+						                                    Cotizar
+						                                </button>
+				                                	</div>
+				                                	
+				                                
+				                                </div>
+					                    	</form>
+					                   
+								    	
+					                        
+					                    </div>
+					                    <div class="modal-footer">
+					                      <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cerrar</button>
+					                                                
+					                    
+					                  </div>
+					                </div>
+					             </div>
+								</div>
+                                <div class="modal" th:id="'staticBackdropreq'" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+														      
+					                <div class="modal-dialog modal-lg"role="document">
+					                  <div class="modal-content">
+					                    <div class="modal-header">
+					                      <h5 class="modal-title" > Nuevo requerimiento</h5>
+					                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					                    </div>
+					                    <div class="modal-body">
+					                    	<form class="user needs-validation" th:action = "@{/nuevorequerimiento/}+${Institution.id_Institution}"th:object="${requerimiento}"enctype = "multipart/form-data" method="post"validate>
+					                    		<div class="form-group row">
+				                                    <div class="col-sm-4 mb-3 mb-sm-0">
+				                                        <input type="text"th:field="*{Nombre_requerimiento}" class="form-control form-control-user"
+				                                            placeholder="Requerimiento">
+				                                    </div>
+				                                    <div class="col-sm-4">
+				                                        <input type="text"th:field="*{Tipo_requerimiento_compra}" class="form-control form-control-user" 
+				                                            placeholder="Tipo requerimiento">
+				                                    </div>
+				                                    <div class="col-sm-4">
+				                                        <input type="text"th:field="*{Unidad_requerimiento}" class="form-control form-control-user" 
+				                                            placeholder="Unidad">
+				                                    </div>
+					                    		</div>
+					                    		<div class = "form-group row">
+				                                    
+				                                    <div class="col-sm-3">
+														<label class="text-gray-550">Parametrización</label>
+				                                        <input type="number"  min = "0" th:field="*{tipo_requerimiento}" class="form-control form-control-user" 
+				                                            placeholder="Unidad">
+				                                    </div>
+				                                    <div class="col-sm-3">
+														<label class="text-gray-550">Cantidad</label>
+				                                        <input type="number" step = "0.01" min = "0" th:field="*{Cantidad}" class="form-control form-control-user" 
+				                                            placeholder="Unidad">
+				                                    </div>
+				                                </div>
+				                 
+				                                <div class = "form-group row">
+				                                
+				                                	<div class="col-sm-12 mb-3 mb-sm-0">
+				                                		<button type = "submit" class="btn btn-success btn-user btn-block">
+						                                    Guardar
+						                                </button>
+				                                	</div>
+				                                	
+				                                
+				                                </div>
+					                    	</form>
+					                   
+								    	
+					                        
+					                    </div>
+					                    <div class="modal-footer">
+					                      <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cerrar</button>
+					                                                
+					                    
+					                  </div>
+					                </div>
+					             </div>
+								</div>
+                                <hr>
+                                         <div class="table-responsive">
+					            			<table class="table table-bordered"  width="100%" cellspacing="0">
+						            			<thead class = "table-success">
+						            				<tr>
+													
+						            					<th scope = "col">Concepto</th>
+						            					<th scope = "col">Tipo</th>
+						            					<th scope = "col">Cantidad</th>
+						            					<th scope = "col">Unidad</th>
+						            					<th scope = "col">Usuario </th>
+						            					<th scope = "col">Cotizar</th>
+						            					<th scope = "col">Cotización </th>
+						            					<th scope = "col">Desestimar</th>
+						            			
+						            	
+						            				</tr>
+						            			</thead>
+						            			<tbody id="tablecotizar">
+												
+						            				<tr th:each="requerimiento:${requerimientosPendientes}">
+													
+														<td th:text="${requerimiento.Nombre_requerimiento}"></td>
+														<td th:text="${requerimiento.Tipo_requerimiento_compra}"></td>
+														<td th:text="${requerimiento.Cantidad}"></td>
+														<td th:text="${requerimiento.Unidad_requerimiento}"></td>
+														<div th:if="${requerimiento.usuario}">
+															<td th:text="${requerimiento.usuario.Nombre}"></td>
+														</div>
+														<div th:unless="${requerimiento.usuario}">
+															<td></td>
+														</div>
+														<td>
+															<input type="checkbox" th:name="reqtocot" class="form-control-user">
+														</td>
+														
+														<td>
+															<button type="button" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" data-bs-toggle="modal" th:attr="data-bs-target='#staticBackdrocot'+${requerimiento.id_Requerimiento}"> Añadir</button>
+							                                <div class="modal" th:id="'staticBackdrocot'+${requerimiento.id_Requerimiento}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+																					      
+												                <div class="modal-dialog modal-xl"role="document">
+												                  <div class="modal-content">
+												                    <div class="modal-header">
+												                      <h5 class="modal-title" > Añadir cotización</h5>
+												                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+												                    </div>
+												                    <div class="modal-body">
+																		<div class ="form-group row">
+																		<div class="col-md-3">
+												                            <div class="bd-example">
+												                            <ul class="list-group list-group-flush">
+												                              <li class="list-group-item">Requerimiento</li>
+												                              <li class="list-group-item">Fecha</li>
+												                              <li class="list-group-item">Usuario</li>
+												                              <li class="list-group-item">Parametrización</li>
+												          
+												                            </ul>
+												                            </div>                            
+												                          </div>
+												                          <div class="col-md-3">
+												                            <div class="bd-example">
+												                            <ul class="list-group ">
+												                              <li class="list-group-item" th:text="${requerimiento.id_Requerimiento}"></li>
+												                              <li class="list-group-item" th:text="${requerimiento.Fecha_requerimiento}"></li>
+												                              <div th:if="${requerimiento.usuario}">
+																					<li class="list-group-item" th:text="${requerimiento.usuario.Nombre}"></li>
+																			  </div>
+												                              <div th:unless="${requerimiento.usuario}">
+																				  <li class="list-group-item" ></li>
+												                              </div>
+												                              <li class="list-group-item" th:text="${requerimiento.tipo_requerimiento}"></li>
+												                      
+												                            </ul>
+												                            </div>                            
+												                          </div>
+												                          <div class="col-md-3">
+												                            <div class="bd-example">
+												                            <ul class="list-group list-group-flush">
+												                              <li class="list-group-item">Nombre requerimiento</li>
+												                              <li class="list-group-item">Tipo requerimiento</li>
+												                              <li class="list-group-item">Unidad medida</li>
+												                              <li class="list-group-item">Cantidad solicitada</li>
+												          
+												                            </ul>
+												                            </div>                            
+												                          </div>
+												                          <div class="col-md-3">
+												                            <div class="bd-example">
+												                            <ul class="list-group ">
+												                              <li class="list-group-item" th:text="${requerimiento.Nombre_requerimiento}"></li>
+												                              <li class="list-group-item" th:text="${requerimiento.Tipo_requerimiento_compra}"></li>
+												                              <li class="list-group-item" th:text="${requerimiento.Unidad_requerimiento}"></li>
+												                            
+												                              <li class="list-group-item" th:text="${requerimiento.Cantidad}"></li>
+												                      
+												                            </ul>
+												                            </div>                            
+												                          </div>
+																		</div>
+																		<hr>
+												                    	<form class="user needs-validation" th:action = "@{/nuevacotizacion/}+${requerimiento.id_Requirement}"th:object="${cotizacion}"enctype = "multipart/form-data" method="post"validate>
+												                    		<div class="form-group row">
+											                                    <div class="col-sm-3 mb-3 mb-sm-0">
+											                                        <input type="text"th:field="*{Articulo}" class="form-control form-control-user"
+											                                            placeholder="Articulo">
+											                                    </div>
+											                                    <div class="col-sm-3">
+											                                        <input type="text"th:field="*{Condiciones_pago}" class="form-control form-control-user" 
+											                                            placeholder="Condiciones de pago">
+											                                    </div>
+											                                    
+											                                    <div class="col-sm-3">
+																					<select class="form-control form-control-user" th:name = "proveedor"id = "prov" placeholder="Proveedor" required>
+																		              	<option selected disabled value="0">Elige el proveedor</option>
+																		              	<div th:each="proveedor:${proveedores}">
+																		              		<option th:text="${proveedor.Nombre_proveedor}" th:value = "${proveedor.id_Provider}"></option>
+																		              	</div>
+																						 
+																						</select>
+											                                    </div>
+											                                    <div class="col-sm-3">
+											                                        <input type="text"th:field="*{Observacion}" class="form-control form-control-user" 
+											                                            placeholder="Observaciones">
+											                                    </div>
+											                                   
+												                    		</div>
+												                    		<div class = "form-group row">
+											                                    <div class="col-sm-3">
+																					<medium class="text-gray-550">Fecha de cotización</medium>
+											                                       
+																					<input type="date"th:name="fecha_cotizacion" class="form-control form-control-user">
+											                                    </div>
+											                                    <div class="col-sm-2">
+																					<medium class="text-gray-550">Plazo de entrega(días)</medium>
+											                                        <input type="number"  min = "0" th:field="*{Plazo_entrega}" class="form-control form-control-user" 
+											                                            placeholder="Unidad">
+											                                    </div>
+											                                    <div class="col-sm-2">
+																					<medium class="text-gray-550">Vigencia</label>
+											                                        <input type="number"  min = "0" th:field="*{vigencia_cotizacion}" class="form-control form-control-user" 
+											                                            placeholder="Unidad">
+											                                    </div>
+											                                    <div class="col-sm-2">
+																					<medium class="text-gray-550">Incluye flete</label>
+											                                        <input type="checkbox"th:field="*{Flete}" class="form-control form-control-user" 
+											                                            placeholder="Unidad">
+											                                    </div>
+											                                    <div class="col-sm-2">
+																					<medium class="text-gray-550">Cumple especificacion</label>
+											                                        <input type="checkbox"th:field="*{Cumple_especificacion}" class="form-control form-control-user" 
+											                                            placeholder="Unidad">
+											                                    </div>
+											                                </div>
+											                 				<hr>
+											                 				<label class ="text-gray-600">Valores económicos</label>
+											                                <div class = "form-group row">
+											                                	 <div class="col-sm-3">
+																					<medium class="text-gray-550">Valor unitario</label>
+											                                        <input type="number" min = "0" step = "1"th:field="*{Valor_unitario}" class="form-control form-control-user" 
+											                                            placeholder="Unidad">
+                      	
+											                                    </div>
+											                                    <div class="col-sm-3">
+																				
+																						<small class="text-gray-550">Cantidad cotizada</small>      	
+											                                        	<input type="number" min="0" th:field="*{Cantidad}" class="form-control form-control-user" >
+																			  
+											                                    </div>
+											                                    <div class="col-sm-3">
+																				
+																						<small class="text-gray-550">IVA</small>      	
+											                                        	<input type="number" min="0" th:field="*{Iva}" class="form-control form-control-user" >
+																			
+											                                    </div>
+											                                    <div class="col-sm-3">
+																				
+																						<small class="text-gray-550">Total</small>      	
+											                                        	<input type="number" min="0" th:field="*{Valor}" class="form-control form-control-user" >
+																			
+											                                    </div>
+											                                </div>
+											                                <div class = "form-group row">
+											                                    <div class="col-sm-3">
+																				
+																						<small class="text-gray-550">Anticipo</small>      	
+											                                        	<input type="number" min="0" th:field="*{Anticipo}" class="form-control form-control-user" >
+																			
+											                                    </div>
+											                                    
+											                                    <div class="col-sm-3">
+																				
+																						<small class="text-gray-550">Presupuestado</small>      	
+											                                        	<input type="number" min="0" th:field="*{Valor_presupuestado}" class="form-control form-control-user" >
+																			
+											                                    </div>
+											                                	<div class="col-sm-12 mb-3 mb-sm-0">
+											                                		<button type = "submit" class="btn btn-success btn-user btn-block">
+													                                    Guardar
+													                                </button>
+											                                	</div>
+											                                	
+											                                
+											                                </div>
+												                    	</form>
+												                   
+															    	
+												                        
+												                    </div>
+												                    <div class="modal-footer">
+												                      <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cerrar</button>
+												                                                
+												                    
+												                  </div>
+												                </div>
+												             </div>
+															</div>
+															
+															
+															
+															 </td>
+															 <td>
+																 <form th:action = "@{/desestimar/}+${requerimiento.id_Requerimiento}"enctype = "multipart/form-data" method="post">
+																	 
+																	 	<button type = "submit" class="btn btn-success btn-user btn-danger">
+													                                    <i>X</i>
+													                                </button>
+														
+																 </form>
+																 
+																 
+															 </td>
+						            				</tr>
+						            				
+						            			</tbody>
+					            			</table>
+					            			
+					            		</div>
+                             			
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-5">
+							<div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-success">Requerimientos denegados</h6>
+                                    <div class="dropdown no-arrow">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                            aria-labelledby="dropdownMenuLink">
+                                            <div class="dropdown-header">Dropdown Header:</div>
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+									<div class="row g-3 mb-3">
+										 <div class = "col-md-10 justify-content-between">
+										
+										 </div>
+									 	 <div class = "col-md-2 order-md-last">
+		                                 	<button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" > Cotizar</button>
+		                                 </div>
+									 </div>
+									<div class="table-responsive">
+										
+            							<table class="table table-bordered" id = "reqnoaprob" width="100%" cellspacing="0">
+	            							<thead class = "table-success">
+				            				<tr>
+													
+					            					<th scope = "col">Concepto</th>
+					            					<th scope = "col">Cantidad</th>
+					            					<th scope = "col">Unidad</th>
+					            					<th scope = "col">Justificación</th>
+					            					<th scope = "col">Reestablecer </th>
+					            			
+					            					
+					            				</tr>
+					            			</thead>
+					            			<tbody>
+					            				<tr th:each="requerimiento,iterador:${requerimientosCancelados}">
+													
+													<td th:text="${requerimiento.Nombre_requerimiento}"></td>
+													<td th:text ="${requerimiento.Cantidad}"></td>
+													
+													<td th:text="${requerimiento.Unidad_requerimiento}"></td>
+													<td th:text="${requerimiento.Justificacion}"></td>
+														<td>
+														<input type="checkbox" th:name="reqtoaprob" class="form-control-user">
+													</td>
+					            				</tr>
+					            			</tbody>
+            							</table>
+                                    </div>
+                                </div>
+							</div>
+                        </div>
+
+                      
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            
+            <!-- End of Footer -->
+
+        <!-- End of Content Wrapper -->
+		<!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; MANTORY 2025</span>
+                    </div>
+                </div>
+            </footer>
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    
+                    <form class="d-flex" th:action="@{/logout}"method="post">
+        
+          
+			          <button class="btn btn-primary" type="submit" value = "Cerrar sesión" >Cerrar sesión</button>
+			        
+			        </form>
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+	
+    <!-- Bootstrap core JavaScript-->
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script th:src="@{/js/jquery.easing.min.js}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script th:src="@{/js/sb-admin-2.min.js}"></script>
+	<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+	
+    <!-- Page level plugins -->
+    <script th:src="@{/js/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/js/dataTables.bootstrap4.min.js}"></script>
+
+    <!-- Page level custom scripts -->
+    <script th:src="@{/js/datatables-demo.js}"></script>
+   <script th:inline = "javascript">
+	function generarRGB(cantidad) {
+	  const colores = [];
+	  for (let i = 0; i < cantidad; i++) {
+	    const r = Math.floor(Math.random() * 256);
+	    const g = Math.floor(Math.random() * 256);
+	    const b = Math.floor(Math.random() * 256);
+	    colores.push(`rgb(${r}, ${g}, ${b})`);
+	  }
+	  return colores;
+	}   
+ 
+  	
+	var requerimientos = document.getElementsByName("reqtocot");
+	
+	var tablarequerimientos = document.getElementById("tablecotizar");
+	var tablaxcotizar = document.getElementById("tablecot");
+	
+	var tablacomp = document.getElementById("comparativo");
+	tablarequerimientos.querySelectorAll('tr').forEach(fila => {
+  // Obtener la casilla de verificación de la fila
+	
+	  var checkbox = fila.querySelector('input[type="checkbox"]');
+	 
+	  // Añadir un evento de escucha al checkbox
+	  checkbox.addEventListener('change', () => {
+	    // Obtener el valor de la primera columna
+	    const valorPrimeraColumna = fila.children[0].textContent;
+		const valorCantidad = fila.children[2].textContent;
+		
+	    // Verificar si el checkbox está marcado
+	    if (checkbox.checked) {
+	      // Añadir el valor a la nueva tabla
+	      const nuevaFila = tablaxcotizar.insertRow();
+	      const nuevaCelda = nuevaFila.insertCell();
+	      const nuevaCelda2 = nuevaFila.insertCell();
+	      nuevaCelda.textContent = valorPrimeraColumna;
+	      nuevaCelda2.textContent = valorCantidad;
+	    } else {
+	      // Si se desmarca el checkbox, se debe eliminar la fila correspondiente de la tabla nueva
+	      //  Esto se puede hacer buscando la fila por el valor de la primera columna y luego eliminándola
+	      //  (La implementación se puede ajustar según sea necesario).
+	      //  Se recomienda que se diseñe una estrategia de manejo del estado del checkbox para que la
+	      //  eliminación de filas sea más eficiente.
+	      //  Ejemplo básico de búsqueda de la fila por el valor de la primera columna:
+	      var filasTablaNueva = tablaxcotizar.querySelectorAll('tr');
+	
+	      filasTablaNueva.forEach(filaTablaNueva => {
+	        if (filaTablaNueva.children[0].textContent === valorPrimeraColumna) {
+	          filaTablaNueva.remove();
+	        }
+	      });
+	    }
+	  });
+	});
+	$("#xmodalcots").click(function(){
+	  document.getElementById('staticBackdropCots').style.display = 'none';
+	  
+
+	});
+	$("#closemodalcots").click(function(){
+	  document.getElementById('staticBackdropCots').style.display = 'none';
+	  
+
+	});
+	var idObra = /*[[${idObra}]]*/ 'default';
+	var modalcots = document.getElementById("staticBackdropCots");
+	function parsearTrazas(trazas){
+		const productos = {};
+		const proveedoresSet = new Set();
+		const cantidades = {};
+		const idcotizaciones = {};
+		const cantidadesrequeridas = [];
+		trazas.forEach(traza => {
+			const [idreq,proveedor,celprov,idcot,producto,valorunitarioStr,cantidad,precioStr,ivaStr,fechacots,plazoentrega,nombrereq,cantidadreq,justificacion] = traza.split(",");
+			const precio = parseFloat(precioStr);
+			proveedoresSet.add(proveedor);
+			cantidadesrequeridas.push(cantidadreq);
+		
+			if(!productos[producto]){
+				productos[producto] = {};
+			}
+			if(!cantidades[producto]){
+				cantidades[producto] = {};
+			}
+			if(!cantidadesrequeridas[producto]){
+				cantidadesrequeridas[producto] = {};
+			}
+			if(!idcotizaciones[producto]){
+				idcotizaciones[producto] = {};
+			}
+			productos[producto][proveedor]=precio;
+			cantidades[producto][proveedor]=cantidad;
+			idcotizaciones[producto][proveedor] = idcot;
+			
+		})
+		return{
+			productos,
+			proveedores: Array.from(proveedoresSet).sort(),
+			cantidadesrequeridas,
+			cantidades,
+			idcotizaciones,
+			
+		}
+	}
+	function aplanaLista(lista) {
+	  let listaAplanada = [];
+	
+	  for (let i = 0; i < lista.length; i++) {
+	    if (Array.isArray(lista[i])) { // Verifica si es una lista (array)
+	      listaAplanada = listaAplanada.concat(aplanaLista(lista[i])); // Recursivamente aplana la sublista
+	    } else {
+	      listaAplanada.push(lista[i]); // Si no es una lista, añade el elemento directamente
+	    }
+	  }
+	
+	  return listaAplanada;
+	}
+	
+	
+	   var comps = document.getElementsByName("compararcot")
+	   document.getElementById("compararButton").onclick = function(evt) {
+		   var items = [];
+		   comps.forEach(function(element){
+		   if(element.checked){
+			   items.push(element.value)
+		   	}
+			   
+		   })
+		   $.ajax({
+				url:"/compararcot/"+idObra+"?compararcot="+items.join(),
+				type:"GET",
+				
+				success: function (response) {
+
+				  listaplanada = aplanaLista(response);
+				
+				  const { productos, proveedores,
+				          cantidadesrequeridas, cantidades,
+				          idcotizaciones } = parsearTrazas(listaplanada);
+				
+				  tablacomp.innerHTML = "";
+				  const tabla      = document.createElement("table");
+				  tabla.id         = "tablacomparativaselect";
+				  tabla.className  = "table table-bordered";
+				
+				  /* ---------------- CABECERAS ------------------- */
+				  const thead      = document.createElement("thead");
+				  const trHead     = document.createElement("tr");
+				  const trSecond   = document.createElement("tr");
+				
+				  trHead.innerHTML =
+				    `<th rowspan="2">PRODUCTO</th>
+				     <th rowspan="2">CANTIDAD REQUERIDA</th>`;
+				
+				  proveedores.forEach(p => {
+				    trHead.innerHTML += `<th colspan="3" style="text-align:center">${p}</th>`;
+				    trSecond.innerHTML +=
+				      `<th>Valor total</th><th>Cantidad</th><th>Elegir</th>`;
+				  });
+				
+				  thead.appendChild(trHead);
+				  thead.appendChild(trSecond);
+				  tabla.appendChild(thead);
+				
+				  /* ---------------- CUERPO ---------------------- */
+				  const tbody = tabla.createTBody();
+				  let idxProd = 0;
+				
+				  Object.entries(productos).forEach(([producto, precios]) => {
+				
+				    const fila = tbody.insertRow();
+				    fila.dataset.producto = producto;                        // para tus selectores
+				
+				    // ✔ producto y cantidad requerida
+				    fila.insertCell().textContent = producto;
+				    fila.insertCell().textContent = cantidadesrequeridas[++idxProd];
+				
+				    // ─── recorrer cada proveedor ──────────────────
+				    proveedores.forEach(proveedor => {
+				
+				      const precioTotal        = precios[proveedor];           // total cotizado
+				      const cantOfrecida       = cantidades[producto][proveedor];
+				
+				      /* >>> 1. Celda con valor total (span.valor-total)  */
+				      const celdaValor = fila.insertCell();
+				      if (precioTotal !== undefined) {
+				        const span = document.createElement("span");
+				        span.classList.add("valor-total");
+				        span.textContent = `$${precioTotal.toLocaleString('es-CO')}`;
+				        celdaValor.appendChild(span);
+				      } else {
+				        celdaValor.textContent = "-";
+				      }
+				
+				      /* >>> 2. Celda con <input> editable               */
+				      const celdaCant = fila.insertCell();
+				      if (precioTotal !== undefined) {
+				
+				        // precio unitario calculado al vuelo
+				        const precioUnit = precioTotal / cantOfrecida;
+				
+				        const input = document.createElement("input");
+				        input.type  = "number";
+				        input.min   = "0";
+				        input.max   = cantOfrecida;           // límite disponible
+				        input.step  = "1";
+				        input.value = cantOfrecida;           // default
+				        input.classList.add("cantidad-editable", "form-control", "form-control-sm");
+				
+				        // datos usados por tu script global
+				        input.dataset.precio = precioUnit;
+				        input.dataset.max    = cantOfrecida;
+				        input.dataset.prov   = proveedor;
+				
+				        celdaCant.appendChild(input);
+				
+				        /* >>> 3. Celda con checkbox de selección      */
+				        const celdaChk = fila.insertCell();
+				        const chk = document.createElement("input");
+				        chk.type  = "checkbox";
+				        chk.classList.add("cotizacion-chk");
+				        chk.dataset.producto  = producto;
+				        chk.dataset.proveedor = proveedor;
+				        chk.dataset.valorunit = precioUnit;
+				        chk.value = idcotizaciones[producto][proveedor];  // por si lo necesitas
+				
+				        celdaChk.appendChild(chk);
+				
+				      } else {
+				        // si el proveedor no cotizó ese producto:
+				        celdaCant.textContent = "-";
+				        fila.insertCell().textContent = "-"; // casilla Elegir vacía
+				      }
+				
+				    }); // fin forEach proveedor
+				  });
+				
+				  /* ---------------- Pie con SUMAS ---------------- */
+				  const numCols  = tabla.rows[0].cells.length;
+				  const totales  = new Array(numCols).fill(0);
+				
+				  [...tabla.tBodies[0].rows].forEach(tr => {
+				    [...tr.cells].forEach((td, i) => {
+				      // suma sólo las celdas con $xxx
+				      if (td.querySelector(".valor-total")) {
+				        const num = +td.querySelector(".valor-total")
+				                       .textContent.replace(/[^0-9.]/g, "");
+				        totales[i] += num;
+				      }
+				    });
+				  });
+				
+				  const filaTot = tabla.insertRow();
+				  filaTot.innerHTML = "<th>Total</th><th></th>";
+				  for (let i = 2; i < numCols; i++) {
+				    filaTot.insertCell().textContent =
+				      totales[i] ? `$${totales[i].toLocaleString('es-CO')}` : "-";
+				  }
+				
+				  /* 👉 Insertar tabla y abrir modal */
+				  tablacomp.appendChild(tabla);
+				  modalcots.style.display = "flex";
+				  initComparativa($(modalcots));   
+				},
+				error: function(xhr){
+					
+				}
+			})
+			
+	   
+	   }
+	   
+	   var checkboxselected = document.getElementsByName("cotizacionesaprobadas");
+	   var tablatoselect = document.getElementById("tablacomparativaselect");
+	   var tablacomprobacion = document.getElementById("feedbackSelect")
+	   
+	   
+	   var idnumcot = "numCot"
+	   function completar(e){
+		   var idreq = e.id.split("Cot")[1]
+		   var idnewinput = idnumcot+idreq
+		   var valueinput = document.getElementById(idnewinput).value
+		   var articuloinput = document.getElementById("articuloCot"+idreq)
+		
+		   var condicionesinput = document.getElementById("condicionesPagoCot"+idreq)
+		   var proveedoridinput = document.getElementById("provCot"+idreq)
+		   var observacioninput = document.getElementById("observacionCot"+idreq)
+		   var fechainput = document.getElementById("fechaCot"+idreq)
+		   var plazoentregainput =document.getElementById("plazoEntregaCot"+idreq)
+		   var vigenciainput =document.getElementById("vigenciaCot"+idreq)
+		   var fleteinput = document.getElementById("fleteCot"+idreq)
+		   var cumpleinput =document.getElementById( "cumpleEspecificacionCot"+idreq)
+		   var numerocotinput = document.getElementById("numeroCot"+idreq)
+			$.ajax({
+					url:"/encontrarCot/"+idObra+"?num_cot="+valueinput,
+					type:"GET",
+					
+					success:function(response){
+						console.log(response)
+						
+						
+						console.log(response[0])
+						articuloinput.value = response[0]
+					    condicionesinput.value = response[1]
+					    proveedoridinput.value = response[2]
+					    observacioninput.value = response[3]
+					    fechainput.value = response[4]
+					    plazoentregainput.value = response[5]
+					    vigenciainput.value = response[6]
+					    fleteinput.checked = response[7]
+					    cumpleinput.checked = response[8]
+					    numerocotinput.value = response[9]
+					},
+					error: function(xhr){
+						
+					}
+				})
+			
+			console.log(valueinput)
+			
+			
+		}
+	
+   </script>
+   <script>
+	   (function(){
+  const fmt = n => n.toLocaleString('es-CO',{maximumFractionDigits:0});
+
+  function recalcularFila(tr){
+    let minimo = Infinity, celdasValor = [];
+    tr.querySelectorAll('input.cantidad-editable').forEach((inp, idx) => {
+      const precio = +inp.dataset.precio;
+      let cant = +inp.value || 0;
+      const max = +inp.dataset.max;
+      if (cant > max) {
+        cant = max;
+        inp.value = cant;
+      }
+      const total  = precio * cant;
+      const span   = tr.querySelectorAll('.valor-total')[idx];
+      span.textContent = fmt(total);
+      celdasValor.push({total, td: span.parentElement});
+      if(cant>0 && total < minimo) minimo = total;
+    });
+    tr.querySelectorAll('.mejor-precio').forEach(td=>td.classList.remove('mejor-precio'));
+    celdasValor.filter(obj=>obj.total===minimo && minimo!==Infinity)
+               .forEach(obj=>obj.td.classList.add('mejor-precio'));
+  }
+
+  function pintarFilaTotales($modal) {
+    const tabla = $modal.find('#tablacomparativaselect')[0];
+    const filas = tabla.querySelectorAll('tbody tr[data-producto]');
+    const numCols = tabla.querySelector('thead tr:last-child').children.length;
+
+    const totales = new Array(numCols).fill(null).map(() => ({ valor: 0, cantidad: 0 }));
+
+    filas.forEach(fila => {
+      [...fila.cells].forEach((td, idx) => {
+        const span = td.querySelector('.valor-total');
+        const input = td.querySelector('input.cantidad-editable');
+
+        if (span) {
+          const valor = parseFloat(span.textContent.replace(/[^0-9,.-]+/g, '').replace(',', '.')) || 0;
+          totales[idx].valor += valor;
+        }
+
+        if (input) {
+          const cantidad = parseFloat(input.value) || 0;
+          totales[idx].cantidad += cantidad;
+        }
+      });
+    });
+
+    const tfoot = tabla.querySelector('tfoot') || tabla.createTFoot();
+    tfoot.innerHTML = '';
+    const trTotal = tfoot.insertRow();
+    trTotal.classList.add('fila-totales');
+
+    for (let i = 0; i < numCols; i++) {
+      const th = document.createElement(i < 2 ? 'th' : 'td');
+      if (i === 0) {
+        th.textContent = 'Total';
+      } else if (i === 1) {
+        th.textContent = '';
+      } else {
+        const { valor, cantidad } = totales[i];
+        if (valor > 0 && cantidad > 0) {
+          th.innerHTML = `$${fmt(valor)}<br><small>${fmt(cantidad)} uds</small>`;
+        } else if (valor > 0) {
+          th.textContent = `$${fmt(valor)}`;
+        } else if (cantidad > 0) {
+          th.textContent = fmt(cantidad);
+        } else {
+          th.textContent = '-';
+        }
+      }
+      trTotal.appendChild(th);
+    }
+  }
+
+  function actualizarResumen($modal){
+    const $body = $modal.find('#tablaResumenCompras tbody');
+    $body.empty();
+    let gran = 0;
+
+    const resumen = {};
+
+    $modal.find('.cotizacion-chk').each(function(){
+      if (!this.checked) return;
+      const chk = this;
+      const tr = chk.closest('tr');
+      const inp = tr.querySelector(`input[data-prov="${chk.dataset.proveedor}"]`);
+      const cant = +inp.value || 0;
+      const precio = +chk.dataset.valorunit;
+      const total = cant * precio;
+      gran += total;
+
+      const proveedor = chk.dataset.proveedor;
+      if (!resumen[proveedor]) resumen[proveedor] = [];
+      resumen[proveedor].push({
+        producto: chk.dataset.producto,
+        cantidad: cant,
+        total: total
+      });
+    });
+
+    Object.entries(resumen).forEach(([proveedor, filas]) => {
+      let subtotal = 0;
+      filas.forEach(row => {
+        subtotal += row.total;
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${row.producto}</td>
+          <td>${proveedor}</td>
+          <td>${row.cantidad}</td>
+          <td>$${fmt(row.total)}</td>`;
+        $body[0].appendChild(tr);
+      });
+      const subtr = document.createElement('tr');
+      subtr.innerHTML = `<th colspan="3" class="text-end">Subtotal ${proveedor}</th><th>$${fmt(subtotal)}</th>`;
+      $body[0].appendChild(subtr);
+    });
+
+    const totalRow = document.createElement('tr');
+    totalRow.innerHTML = `<th colspan="3" class="text-end">TOTAL</th><th>$${fmt(gran)}</th>`;
+    $body[0].appendChild(totalRow);
+  }
+
+  function initComparativa($modal){
+    const $tabla = $modal.find('#tablacomparativaselect');
+
+    $modal.off('input.cant')
+          .on('input.cant','input.cantidad-editable',function(){
+            const tr = this.closest('tr');
+            recalcularFila(tr);
+            recalcularTotales($modal);
+            actualizarResumen($modal);
+            pintarFilaTotales($modal);
+          });
+
+    $modal.off('change.chk')
+          .on('change.chk','.cotizacion-chk',function(){
+            const tr = this.closest('tr');
+            recalcularFila(tr);
+            actualizarResumen($modal);
+            pintarFilaTotales($modal);
+          });
+
+    $tabla.find('tbody tr[data-producto]').each((_,tr)=>recalcularFila(tr));
+    recalcularTotales($modal);
+    actualizarResumen($modal);
+    pintarFilaTotales($modal);
+  }
+
+  document.getElementById('staticBackdropCots').addEventListener('hide.bs.modal', function () {
+    this.querySelectorAll('input, select, textarea, button').forEach(el => el.blur());
+  });
+
+  $('#staticBackdropCots').on('shown.bs.modal',function(){
+    initComparativa($(this));
+  });
+
+  // 👇 IMPORTANTE: asegura que esto se llama tras construir tabla AJAX
+  window.initComparativa = initComparativa;
+})();
+   </script>
+   <style>
+.mejor-precio { background: #d1fadf; font-weight: bold; }
+.table thead th { background: #f8f9fc; }
+</style>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ 
+
+</body>
+
+</html>

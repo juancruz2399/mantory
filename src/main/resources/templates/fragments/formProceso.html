@@ -1,0 +1,72 @@
+<!-- templates/fragments/formProceso.html -->
+<div th:fragment="formProceso">
+  <form th:action="@{'/proceso/form/' + ${device.id_Device}}" method="post" enctype="multipart/form-data" th:object="${proceso}">
+
+    <!-- Campo oculto de referencia al dispositivo -->
+    <input type="hidden" th:field="*{device.id_Device}" />
+
+    <div class="mb-3">
+      <label class="form-label">Nombre del Proceso</label>
+      <input type="text" th:field="*{Name_process}" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Fecha Programada</label>
+      <input type="date" th:field="*{Programming}" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Fecha de Ejecución</label>
+      <input type="date" th:field="*{Date_process}" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Fecha de Recepción</label>
+      <input type="date" th:field="*{Reception}" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Certificado</label>
+      <input type="text" th:field="*{Certificate}" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Condiciones</label>
+      <textarea th:field="*{Conditions}" class="form-control" rows="3"></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Empresa</label>
+      <input type="text" th:field="*{Company}" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Número</label>
+      <input type="text" th:field="*{Number}" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Aprobado</label>
+      <select th:field="*{Approved}" class="form-select">
+        <option value="">Seleccione...</option>
+        <option value="SI">SI</option>
+        <option value="NO">NO</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Ejecutor</label>
+      <input type="text" th:field="*{Performer}" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Adjuntar Informe (PDF)</label>
+      <input type="file" name="archivoPdf" accept="application/pdf" class="form-control" />
+    </div>
+
+    <div class="text-end mt-4">
+      <button type="submit" class="btn btn-success">Guardar Proceso</button>
+    </div>
+
+  </form>
+</div>

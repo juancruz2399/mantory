@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Mantenimiento</title>
+
+    <!-- Custom fonts for this template -->
+    	<link rel="stylesheet" th:href="@{/font/bootstrap-icons.css}">
+	<link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom styles for this page -->
+    <script type="text/javascript" th:src="@{/js/moment.min.js}"></script>
+    	<script type="text/javascript" th:src="@{/js/daterangepicker.js}"></script>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/daterangepicker.css}">
+	<script th:src = "@{/js/chart.js}"></script>
+	 <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" th:href = "@{/home}">
+                <div class="sidebar-brand-icon rotate-n-15">
+               
+                    <div class="icon">
+				      <i class="bi bi-table"></i>
+				      
+				    </div>
+                </div>
+                <div class="sidebar-brand-text mx-3">Mantory</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Principales
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    
+				      <i class="bi bi-hospital-fill"></i>
+				      
+				
+                    <span>Instituciones</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Instituciones activas</h6>
+                        <div th:each = "institution:${institutions}">
+                        	<a class="collapse-item" th:href="@{/devicesbyin/}+${institution.id_Institution}" th:text="${institution.Nombre}"></a>
+                        </div>
+        
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="bi bi-pencil-square"></i>
+                    <span>Crear</span>
+                </a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Selecciona lo que quieres crear</h6>
+                        <a class="collapse-item" th:href="@{/newinstitution}">Institución</a>
+                        <a class="collapse-item" href="utilities-border.html">Equipos</a>
+                        <a class="collapse-item" href="utilities-border.html">Plan</a>
+                       	<a class="collapse-item" th:href="@{/newservice}">Servicio</a>
+                       	<a class="collapse-item" th:href="@{/newtypes}">Tipo equipo</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Funciones adicionales
+
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Resumen mensual</span>
+                </a>
+                
+            </li>
+
+            <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="charts.html">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Gráficas</span></a>
+            </li>
+
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="tables.html">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Informes</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle">
+                </button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <form class="form-inline">
+                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                    </form>
+
+                    <!-- Topbar Search -->
+                    <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Search for..." aria-label="Search"
+                                            aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+
+                        <!-- Nav Item - Alerts -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell fa-fw"></i>
+                                <!-- Counter - Alerts -->
+                                <span class="badge badge-danger badge-counter">3+</span>
+                            </a>
+                            <!-- Dropdown - Alerts -->
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="alertsDropdown">
+                                <h6 class="dropdown-header">
+                                    Alerts Center
+                                </h6>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-primary">
+                                            <i class="fas fa-file-alt text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 12, 2019</div>
+                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-success">
+                                            <i class="fas fa-donate text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 7, 2019</div>
+                                        $290.29 has been deposited into your account!
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-warning">
+                                            <i class="fas fa-exclamation-triangle text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 2, 2019</div>
+                                        Spending Alert: We've noticed unusually high spending for your account.
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                            </div>
+                        </li>
+
+                        <!-- Nav Item - Messages -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-envelope fa-fw"></i>
+                                <!-- Counter - Messages -->
+                                <span class="badge badge-danger badge-counter">7</span>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="messagesDropdown">
+                                <h6 class="dropdown-header">
+                                    Message Center
+                                </h6>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                                            alt="...">
+                                        <div class="status-indicator bg-success"></div>
+                                    </div>
+                                    <div class="font-weight-bold">
+                                        <div class="text-truncate">Hi there! I am wondering if you can help me with a
+                                            problem I've been having.</div>
+                                        <div class="small text-gray-500">Emily Fowler · 58m</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
+                                            alt="...">
+                                        <div class="status-indicator"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">I have the photos that you ordered last month, how
+                                            would you like them sent to you?</div>
+                                        <div class="small text-gray-500">Jae Chun · 1d</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
+                                            alt="...">
+                                        <div class="status-indicator bg-warning"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">Last month's report looks great, I am very happy with
+                                            the progress so far, keep up the good work!</div>
+                                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
+                                            alt="...">
+                                        <div class="status-indicator bg-success"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
+                                            told me that people say this to all dogs, even if they aren't good...</div>
+                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                            </div>
+                        </li>
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Wilson Camargo</span>
+                                <img class="img-profile rounded-circle"
+                                    src="img/undraw_profile.svg">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Perfil
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Configuraciones
+                                </a>
+                               
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Cerrar sesión
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <nav>
+			          <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+			            <a class="nav-link active" id="nav-profile-tab" data-bs-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="true">Mantenimiento</a>
+			            <a class="nav-link" id="nav-calval-tab" data-bs-toggle="tab" href="#nav-calval" role="tab" aria-controls="nav-calval" aria-selected="false">Procesos</a>
+			            <a class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Estadísticas</a>
+			         	<form>
+	                        	<div class = "input-group">
+	                            	<input type="month" id = "mesInput" class = "form-control" required>
+	                            	<button type="button" id="btnBuscar" class="w-200 btn btn-secondary btn-sm">Buscar</button>
+	                        	</div>
+	                    	</form>
+			          </div>
+			        </nav>
+			        <div class="tab-content" id="nav-tabContent">
+			        	<div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+			        		<!-- DataTales Example -->
+		                    <div class="card shadow mb-4">
+	                    	<article class="my-3" id="progress">
+
+							      <div th:switch="${advancecolor}">
+							        <div class="bd-example">
+							        <div class="progress mb-3" th:case="1">
+							          <div class="progress-bar bg-success w-100" role="progressbar" th:aria-valuenow="${porcentaje}" aria-valuemin="0" aria-valuemax="100" th:text="${porcentaje}+'%'"></div>
+							        </div>
+							        <div class="progress mb-3" th:case="2">
+							          <div class="progress-bar bg-info w-75" role="progressbar" th:aria-valuenow="${porcentaje}" aria-valuemin="75" aria-valuemax="100" th:text="${porcentaje}+'%'"></div>
+							        </div>
+							        <div class="progress mb-3" th:case="3">
+							          <div class="progress-bar bg-secondary w-50" role="progressbar" th:aria-valuenow="${porcentaje}" aria-valuemin="50" aria-valuemax="75" th:text="${porcentaje}+'%'"></div>
+							        </div>
+							        <div class="progress mb-3" th:case="4">
+							          <div class="progress-bar bg-warning w-25" role="progressbar" th:aria-valuenow="${porcentaje}" aria-valuemin="25" aria-valuemax="50" th:text="${porcentaje}+'%'"></div>
+							        </div>
+							        <div class="progress" th:case="5">
+							          <div class="progress-bar bg-danger" role="progressbar" th:aria-valuenow="${porcentaje}" aria-valuemin="0" aria-valuemax="25"th:text="${porcentaje}+'%'"></div>
+							        </div>
+							        </div>
+						
+							      </div>
+							    </article>
+		                     
+		                        <div class="card-body">
+		                            <div class="table-responsive">
+		                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+		                                    <thead>
+		                                        <tr>
+		                                            <th>Id</th>
+		                                            <th>Nombre</th>
+		                                            <th>Marca</th>
+		                                            <th>Modelo</th>
+		                                            <th>Serie</th>
+		                                            <th>Institución</th>
+		                                            <th>Último reporte preventivo</th>
+		                                            <th>Programación</th>
+		                                            <th>Periodicidad</th>
+		                                            <th>Estado</th>
+		                                          
+		                                        </tr>
+		                                    </thead>
+		                                    <tfoot>
+		                                        <tr>
+		                                            <th>Id</th>
+		                                            <th>Nombre</th>
+		                                            <th>Marca</th>
+		                                            <th>Modelo</th>
+		                                            <th>Serie</th>
+		                                            <th>Institución</th>
+		                                            <th>Último reporte preventivo</th>
+		                                            <th>Programación</th>
+		                                            <th>Periodicidad</th>
+		                                            <th>Estado</th>
+		                                        </tr>
+		                                    </tfoot>
+		                                    <tbody>
+		                                        
+		
+		                                    </tbody>
+		                                </table>
+		                            </div>
+		                        </div>
+		                    </div>
+		                    
+			        	</div>
+			        	<div class="tab-pane fade" id="nav-calval" role="tabpanel" aria-labelledby="nav-calval-tab">
+			        		<div class="card shadow mb-4">
+	                    	<article class="my-3" id="progress">
+
+							      <div th:switch="${advancecolor}">
+							        <div class="bd-example">
+							        <div class="progress mb-3" th:case="1">
+							          <div class="progress-bar bg-success w-100" role="progressbar" th:aria-valuenow="${porcentaje}" aria-valuemin="0" aria-valuemax="100" th:text="${porcentaje}+'%'"></div>
+							        </div>
+							        <div class="progress mb-3" th:case="2">
+							          <div class="progress-bar bg-info w-75" role="progressbar" th:aria-valuenow="${porcentaje}" aria-valuemin="75" aria-valuemax="100" th:text="${porcentaje}+'%'"></div>
+							        </div>
+							        <div class="progress mb-3" th:case="3">
+							          <div class="progress-bar bg-secondary w-50" role="progressbar" th:aria-valuenow="${porcentaje}" aria-valuemin="50" aria-valuemax="75" th:text="${porcentaje}+'%'"></div>
+							        </div>
+							        <div class="progress mb-3" th:case="4">
+							          <div class="progress-bar bg-warning w-25" role="progressbar" th:aria-valuenow="${porcentaje}" aria-valuemin="25" aria-valuemax="50" th:text="${porcentaje}+'%'"></div>
+							        </div>
+							        <div class="progress" th:case="5">
+							          <div class="progress-bar bg-danger" role="progressbar" th:aria-valuenow="${porcentaje}" aria-valuemin="0" aria-valuemax="25"th:text="${porcentaje}+'%'"></div>
+							        </div>
+							        </div>
+						
+							      </div>
+							    </article>
+		                     
+		                        <div class="card-body">
+		                            <div class="table-responsive">
+		                                <table class="table table-bordered" id="dataTableCalVal" width="100%" cellspacing="0">
+		                                    <thead>
+		                                        <tr>
+		                                            <th>Id</th>
+		                                            <th>Nombre</th>
+		                                            <th>Marca</th>
+		                                            <th>Modelo</th>
+		                                            <th>Serie</th>
+		                                            <th>Institución</th>
+		                                            <th>Tipo de proceso</th>
+		                                            <th>Último proceso</th>
+		                                            <th>Programación</th>
+		                                           
+		                                            <th>Estado</th>
+		                                          
+		                                        </tr>
+		                                    </thead>
+		                                    <tfoot>
+		                                        <tr>
+		                                            <th>Id</th>
+		                                            <th>Nombre</th>
+		                                            <th>Marca</th>
+		                                            <th>Modelo</th>
+		                                            <th>Serie</th>
+		                                            <th>Institución</th>
+		                                            <th>Tipo de proceso</th>
+		                                            <th>Último proceso</th>
+		                                            <th>Programación</th>
+		                                            
+		                                            <th>Estado</th>
+		                                        </tr>
+		                                    </tfoot>
+		                                    <tbody>
+		                                        
+		
+		                                    </tbody>
+		                                </table>
+		                            </div>
+		                        </div>
+		                    </div>
+			        	</div>
+			        	<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+			        	</div>
+			        </div>
+<!-- Modal NO EJECUTADO -->
+							<div class="modal fade" id="modalNo" tabindex="-1">
+							  <div class="modal-dialog modal-dialog-centered">
+							    <div class="modal-content">
+							      <div class="modal-header bg-danger text-white">
+							        <h5 class="modal-title">Dispositivo sin ejecutar</h5>
+							        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+							      </div>
+							      <div class="modal-body"></div>
+							    </div>
+							  </div>
+							</div>
+							<!-- Modal REPROGRAMADO -->
+							<div class="modal" id="modalRe" tabindex="-1">
+							  <div class="modal-dialog modal-dialog-centered modal-lg">
+							    <div class="modal-content">
+							      <div class="modal-header bg-primary text-white">
+							        <h5 class="modal-title">Dispositivo reprogramado</h5>
+							        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+							      </div>
+							      <div class="modal-body"></div>
+							    </div>
+							  </div>
+							</div>
+							<!-- Modal EJECUTADO -->
+							<div class="modal fade" id="modalOk" tabindex="-1">
+							  <div class="modal-dialog modal-dialog-centered">
+							    <div class="modal-content">
+							      <div class="modal-header bg-success text-white">
+							        <h5 class="modal-title">Dispositivo ejecutado</h5>
+							        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+							      </div>
+							      <div class="modal-body"></div>
+							    </div>
+							  </div>
+							</div>
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Mantory 2022-2023</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Seguro quiere cerrar sesión?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Seleccione cancelar si quiere volver a la página o cerrar sesión si desea salir</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" href="login.html">Cerrar sesión</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script th:inline = "javascript">
+  	/*<![CDATA[*/
+   		// 1️⃣  Inicializa DataTable UNA sola vez ------------
+		const tabla = $('#dataTable').DataTable({
+		  columns: [
+		    { data: null }, // Botón
+		    { data: 'nombre' },
+		    { data: 'marca' },
+		    { data: 'modelo' },
+		    { data: 'serie' },
+		    { data: 'institucion' },
+		    { data: 'ultimoreporte' },
+		    { data: 'meses' },
+		    { data: 'periodicidad' },
+		    { data: 'estado' }
+		  ],
+		  createdRow: function (row, data, dataIndex) {
+		    const estado = (data.estado || '').toUpperCase();
+		    let colorBtn = 'btn-secondary';
+		    let colorCell = 'table-secondary';
+		
+		    if (estado === 'NO EJECUTADO') {
+		      colorBtn = 'btn-danger';
+		      colorCell = 'table-danger';
+		    } else if (estado === 'EJECUTADO') {
+		      colorBtn = 'btn-success';
+		      colorCell = 'table-success';
+		    } else if (estado === 'REPROGRAMADO') {
+		      colorBtn = 'btn-warning';
+		      colorCell = 'table-warning';
+		    }
+		
+		    // Columna del botón
+		    $('td', row).eq(0).html(`
+		      <button class="btn btn-sm ${colorBtn} btn-ver"
+		        data-id="${data.id}"
+		        data-estado="${data.estado}"
+		        data-fecha="${data.ultimoreporte || ''}">
+		        Ver ${data.id}
+		      </button>
+		    `);
+		
+		    // Columna del estado (última)
+		    $('td', row).eq(9).addClass(colorCell);
+		  },
+		  language: {
+		    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
+		  }
+		});
+
+		const tablaCalVal = $('#dataTableCalVal').DataTable({
+		  columns: [
+		    { data: null }, // Botón
+		    { data: 'nombre' },
+		    { data: 'marca' },
+		    { data: 'modelo' },
+		    { data: 'serie' },
+		    { data: 'institucion' },
+		    { data: 'tipo' },
+		    { data: 'ultimoproceso' },
+		    { data: 'meses' },
+		    { data: 'estado' }
+		  ],
+		  createdRow: function (row, data, dataIndex) {
+		    const estado = (data.estado || '').toUpperCase();
+		    let colorBtn = 'btn-secondary';
+		    let colorCell = 'table-secondary';
+		
+		    if (estado === 'NO EJECUTADO') {
+		      colorBtn = 'btn-danger';
+		      colorCell = 'table-danger';
+		    } else if (estado === 'EJECUTADO') {
+		      colorBtn = 'btn-success';
+		      colorCell = 'table-success';
+		    } else if (estado === 'REPROGRAMADO') {
+		      colorBtn = 'btn-warning';
+		      colorCell = 'table-warning';
+		    }
+		
+		    // Columna del botón
+		    $('td', row).eq(0).html(`
+		      <button class="btn btn-sm ${colorBtn} btn-ver"
+		        data-id="${data.id}"
+		        data-estado="${data.estado}"
+		        data-fecha="${data.ultimoproceso || ''}">
+		        Ver ${data.id}
+		      </button>
+		    `);
+		
+		    // Columna del estado (última)
+		    $('td', row).eq(9).addClass(colorCell);
+		  },
+		  language: {
+		    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
+		  }
+		});
+
+
+		function btnRow(id, estado, esProceso) {
+		  const $modalBody = $('#modalNo .modal-body');
+		  $modalBody.html('<div class="text-center">Cargando formulario...</div>');
+		
+		  const url = esProceso
+		    ? `/proceso/form/${id}`    // Si es proceso no ejecutado
+		    : `/reporte/form/${id}`;   // Si es mantenimiento preventivo no ejecutado
+		
+		  fetch(url)
+			  .then(response => {
+			    if (!response.ok) throw new Error('Error en la solicitud');
+			    return response.text();
+			  })
+			  .then(html => {
+			    console.log(html);
+			    document.querySelector('#modalNo .modal-body').innerHTML = html;
+			    const modal = new bootstrap.Modal(document.getElementById('modalNo'));
+			    modal.show();
+			  })
+			  .catch(() => {
+			    document.querySelector('#modalNo .modal-body').innerHTML = '<p class="text-danger">Error al cargar el formulario</p>';
+			  });
+		}
+		function cargarDatos(mes) {
+		  $.ajax({
+		    url: '/cargarMesMantenimiento',
+		    type: 'GET',
+		    data: { fecha_ingresada: mes + '-01' },
+		    success: data => {
+		      const filasPreventivo = [];
+		      const filasProceso = [];
+		
+		      data.forEach(r => {
+		        const tipoPrograma = r[9];
+		
+		        if (tipoPrograma === 'PROCESO') {
+		          filasProceso.push({
+		            id:            r[0],
+		            nombre:        r[1],
+		            marca:         r[2],
+		            modelo:        r[3],
+		            serie:         r[4],
+		            institucion:   r[7],
+		            tipo:          r[5],     // tipo_proceso
+		            ultimoproceso: r[8] ?? '—',
+		            meses:         r[6],
+		            estado:        r[10]
+		          });
+		        } else if (tipoPrograma === 'PREVENTIVO') {
+		          filasPreventivo.push({
+		            id:            r[0],
+		            nombre:        r[1],
+		            marca:         r[2],
+		            modelo:        r[3],
+		            serie:         r[4],
+		            meses:         r[5],
+		            periodicidad:  r[6],
+		            institucion:   r[7],
+		            ultimoreporte: r[8] ?? '—',
+		            programa:      r[9],
+		            estado:        r[10]
+		          });
+		        }
+		      });
+		
+		      tabla.clear().rows.add(filasPreventivo).draw();     // Tabla #dataTable
+		      tablaCalVal.clear().rows.add(filasProceso).draw();  // Tabla #dataTableCalVal
+		    },
+		    error: () => alert('Error al obtener los datos.')
+		  });
+		}
+
+		$('#btnBuscar').on('click', () => {
+		  const mesInput = $('#mesInput').val();
+		  if (!mesInput) return alert('Selecciona un mes válido.');
+		  cargarDatos(mesInput);
+		});
+		
+		$(document).on('click', '.btn-ver', function () {
+		  const $btn   = $(this);
+		  const estado = $btn.data('estado')?.toUpperCase();
+		  const id     = $btn.data('id');
+		  const fecha  = $btn.data('fecha');
+		
+		  // Detectar a qué tabla pertenece el botón clicado
+		  const esProceso = $btn.closest('table').attr('id') === 'dataTableCalVal';
+		
+		  if (estado === 'NO EJECUTADO') {
+			  const $modalBody = $('#modalNo .modal-body');
+			  $modalBody.html('<div class="text-center">Cargando formulario...</div>');
+			
+			  const url = esProceso
+			    ? `/proceso/form/${id}`
+			    : `/reporte/form/${id}`;
+			
+			  fetch(url)
+			  .then(res => res.text())
+			  .then(html => {
+			    const $modalBody = $('#modalNo .modal-body');
+			    $modalBody.html(html);
+			
+			    // esperar un "tick" para que el DOM renderice
+			    setTimeout(() => {
+			      const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('modalNo'));
+			      modal.show();
+			    }, 10);
+			  })
+			  .catch(err => {
+			    console.error('Error al cargar formulario:', err);
+			    $('#modalNo .modal-body').html('<p class="text-danger">Error al cargar el formulario</p>');
+			  });
+			}
+		 else {
+		    const modalTarget = estado === 'EJECUTADO' ? '#modalOk' : '#modalRe';
+		    const $modalBody = $(`${modalTarget} .modal-body`);
+		    $modalBody.html('<div class="text-center">Cargando reporte...</div>');
+		
+		    const url = esProceso
+		      ? `/buscarProcesoDinamico/${id}`  // Nueva ruta para procesos
+		      : `/buscarReporteDinamico/${id}`; // Ruta actual para mantenimiento
+			
+		    $.ajax({
+		      url,
+		      data: { fecha_reporte: fecha },
+		      success: reporte => {
+				 console.log(reporte)
+		        const r = reporte?.[0] || [];
+		        const pdf = r[11];
+		        console.log(pdf)
+		        const resumen = `
+		          <div class="mb-2"><strong>Equipo:</strong> ${r[1] || '—'}</div>
+		          <div class="mb-2"><strong>Marca:</strong> ${r[2] || '—'}</div>
+		          <div class="mb-2"><strong>Modelo:</strong> ${r[3] || '—'}</div>
+		          <div class="mb-2"><strong>Serie:</strong> ${r[4] || '—'}</div>
+		          <hr>
+		          ${pdf ? `<iframe src="${pdf}" width="100%" height="500px" style="border:none"></iframe>` : '<p class="text-danger">PDF no disponible</p>'}
+		        `;
+		        $modalBody.html(resumen);
+		      },
+		      error: () => {
+		        $modalBody.html(`<p class="text-danger">No se pudo cargar el reporte del equipo ${id}.</p>`);
+		      }
+		    });
+		
+		    $(modalTarget).modal('show');
+		  }
+		});
+
+		
+		// Inicialización automática al cargar la página
+		$(document).ready(() => {
+		  const mesActual = new Date().toISOString().slice(0, 7); // "YYYY-MM"
+		  $('#mesInput').val(mesActual);
+		  cargarDatos(mesActual);
+		});
+		function probarManual() {
+		    const html = `<!-- pega aquí el formulario que viste en consola -->`;
+		
+		    $('#modalNo .modal-body').html(html);
+		
+		    const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('modalNo'));
+		    modal.show();
+		  }
+    /*]]>*/
+    </script>
+
+<script>
+  document.getElementById('abrirPrueba').addEventListener('click', () => {
+    const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('modalNo'));
+    modal.show();
+  });
+</script>
+  <!-- Core plugin JavaScript-->
+    <script th:src="@{/js/jquery.easing.min.js}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script th:src="@{/js/sb-admin-2.min.js}"></script>
+
+
+
+</body>
+
+</html>

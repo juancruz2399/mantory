@@ -1,0 +1,69 @@
+<div th:fragment="formProceso">
+  <form th:action="@{'/proceso/save/' + ${device.id_Device}}" method="post" enctype="multipart/form-data" th:object="${proceso}">
+
+    <input type="hidden" th:field="*{id_Process}" />
+
+    <div class="mb-3">
+      <label class="form-label">Nombre del Proceso</label>
+      <input type="text" th:field="*{Name_process}" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Fecha Programada</label>
+      <input type="date" th:field="*{Programming}" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Compañía</label>
+      <input type="text" th:field="*{Company}" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Responsable / Técnico</label>
+      <input type="text" th:field="*{Performer}" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Condiciones</label>
+      <textarea th:field="*{Conditions}" class="form-control" rows="2"></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Certificado</label>
+      <input type="text" th:field="*{Certificate}" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Fecha de Ejecución</label>
+      <input type="date" th:field="*{Date_process}" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Recepción</label>
+      <input type="date" th:field="*{Reception}" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Número de Proceso</label>
+      <input type="text" th:field="*{Number}" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Aprobado</label>
+      <select th:field="*{Approved}" class="form-select">
+        <option value="SI">Sí</option>
+        <option value="NO">No</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Ubicación (PDF)</label>
+      <input type="file" name="file" accept="application/pdf" class="form-control" />
+    </div>
+
+    <div class="text-end mt-4">
+      <button type="submit" class="btn btn-danger">Guardar Proceso</button>
+    </div>
+
+  </form>
+</div>

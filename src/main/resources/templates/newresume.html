@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title th:text = "'Hoja de vida '+${device.Serie}"></title>
+
+    <!-- Custom fonts for this template-->
+    <link rel="stylesheet" th:href="@{/font/bootstrap-icons.css}">
+	<link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+	<script type="text/javascript" th:src="@{/js/jquery-3.6.0.min.js}"></script>
+   	<link th:href="@{/css/sb-admin-2.css}" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+</head>
+
+<body class="bg-gradient-primary">
+	<!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" th:href = "@{/home}">
+                <div class="sidebar-brand-icon rotate-n-15">
+               
+                    <div class="icon">
+				      <i class="bi bi-table"></i>
+				      
+				    </div>
+                </div>
+                <div class="sidebar-brand-text mx-3">Mantory</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Principales
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    
+				      <i class="bi bi-hospital-fill"></i>
+				      
+				
+                    <span>Instituciones</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Instituciones activas</h6>
+                        <div th:each = "institution:${institutions}">
+                        	<a class="collapse-item" th:href="@{/devicesbyin/}+${institution.id_Institution}" th:text="${institution.Nombre}"></a>
+                        </div>
+        
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="bi bi-pencil-square"></i>
+                    <span>Crear</span>
+                </a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Selecciona lo que quieres crear</h6>
+                        <a class="collapse-item" th:href="@{/newinstitution}">Institución</a>
+                        <a class="collapse-item" href="utilities-border.html">Equipos</a>
+                        <a class="collapse-item" href="utilities-border.html">Plan</a>
+                       	<a class="collapse-item" th:href="@{/newservice}">Servicio</a>
+                       	<a class="collapse-item" th:href="@{/newtypes}">Tipo equipo</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Funciones adicionales
+
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Resumen mensual</span>
+                </a>
+                
+            </li>
+
+            <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="charts.html">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Gráficas</span></a>
+            </li>
+
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="tables.html">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Informes</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle">
+                </button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Search -->
+                    <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Search for..." aria-label="Search"
+                                            aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+
+                        <!-- Nav Item - Alerts -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell fa-fw"></i>
+                                <!-- Counter - Alerts -->
+                                <span class="badge badge-danger badge-counter">3+</span>
+                            </a>
+                            <!-- Dropdown - Alerts -->
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="alertsDropdown">
+                                <h6 class="dropdown-header">
+                                    Alerts Center
+                                </h6>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-primary">
+                                            <i class="fas fa-file-alt text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 12, 2019</div>
+                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-success">
+                                            <i class="fas fa-donate text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 7, 2019</div>
+                                        $290.29 has been deposited into your account!
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-warning">
+                                            <i class="fas fa-exclamation-triangle text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 2, 2019</div>
+                                        Spending Alert: We've noticed unusually high spending for your account.
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                            </div>
+                        </li>
+
+                        <!-- Nav Item - Messages -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-envelope fa-fw"></i>
+                                <!-- Counter - Messages -->
+                                <span class="badge badge-danger badge-counter">7</span>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="messagesDropdown">
+                                <h6 class="dropdown-header">
+                                    Message Center
+                                </h6>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                                            alt="...">
+                                        <div class="status-indicator bg-success"></div>
+                                    </div>
+                                    <div class="font-weight-bold">
+                                        <div class="text-truncate">Hi there! I am wondering if you can help me with a
+                                            problem I've been having.</div>
+                                        <div class="small text-gray-500">Emily Fowler · 58m</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
+                                            alt="...">
+                                        <div class="status-indicator"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">I have the photos that you ordered last month, how
+                                            would you like them sent to you?</div>
+                                        <div class="small text-gray-500">Jae Chun · 1d</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
+                                            alt="...">
+                                        <div class="status-indicator bg-warning"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">Last month's report looks great, I am very happy with
+                                            the progress so far, keep up the good work!</div>
+                                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
+                                            alt="...">
+                                        <div class="status-indicator bg-success"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
+                                            told me that people say this to all dogs, even if they aren't good...</div>
+                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                            </div>
+                        </li>
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Wilson Camargo</span>
+                                <img class="img-profile rounded-circle"
+                                    src="img/undraw_profile.svg">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Perfil
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Configuraciones
+                                </a>
+                               
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Cerrar sesión
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Bootstrap core JavaScript-->
+			    <div class="container">
+			
+			        <div class="card o-hidden border-0 shadow-lg my-5">
+			            <div class="card-body p-0">
+			                <!-- Nested Row within Card Body -->
+			                <div class="row">
+		
+			                    <div class="col-lg-12">
+			                        <div class="p-5">
+			                            <div class="text-center">
+			                                <h1 class="h4 text-gray-900 mb-4">Nueva hoja de vida</h1>
+			                            </div>
+			                            <form class="user needs-validation" th:action = "@{/newresume/}+${device.id_Device}"th:object="${resume}"enctype = "multipart/form-data" method="post"validate>
+			                                <div class="form-group row">
+			                                    <div class="col-sm-3 mb-3 mb-sm-0">
+			                                    <label for= "fecha" class="col-form-label-sm">Fecha de compra</label>
+			                                        <input type="date"th:name="fecha_compra" class="form-control form-control-user" id = "fc"
+			                                            placeholder="Fecha de compra" required>
+			                                    </div>
+			                                    <div class="col-sm-3 mb-3 mb-sm-0">
+			                                         <label for= "llamadotime" class="col-form-label-sm">Fecha instalación</label>
+              										 <input th:name= "fecha_instalacion" placeholder= "Selected time" type="date" id = "fi"class="form-control form-control-user">
+       
+			                                    </div>
+			                                    <div class="col-sm-3">
+				                                        <label for= "tsrattime" class="col-form-label-sm">Fecha inicio</label>
+              										 <input th:name= "fecha_inicio_operacion" placeholder= "Selected time" type="date" id = "fo"class="form-control form-control-user">
+       
+				                                    </div>
+				                                    <div class="col-sm-3">
+				                                        <label for= "llamadotime" class="col-form-label-sm">Fecha de vencimiento</label>
+              										 <input th:name= "fecha_vencimiento" placeholder= "Selected time" type="date" id = "fv"class="form-control form-control-user">
+       
+				                                    </div>
+				                                    <div class="col-sm-3">
+				                                        <label for= "fabdate" class="col-form-label-sm">Fecha de fabricación</label>
+              										 <input th:name= "fecha_fabricacion" placeholder= "Selected time" type="date" id = "fabdate"class="form-control form-control-user">
+       
+				                                    </div>
+			                                </div>
+			                                <hr>
+			                                <div class="form-group row">
+			                                	<div class = "col-sm-8 mb-3 mb-sm-0">
+			                                		<label class="mb-3 col-form-label-sm">Clase</label>
+			                                		<div class = "row">
+					                             		<div class="col-sm-6">
+					                             			          
+												              <div class="my-3">
+												                <div class="form-check">
+												                  <input th:field="*{Clase_equipo}"id="electrico" value=1 name="classenergy" type="radio" class="form-check-input" required>
+												                  <label class="col-form-label-sm" for="electrico">Eléctrico</label>
+												                </div>
+												                <div class="form-check">
+												                  <input th:field="*{Clase_equipo}"id="electrico" value=7 name="classenergy" type="radio" class="form-check-input" required>
+												                  <label class="col-form-label-sm" for="electrico">Electronico</label>
+												                </div>
+												                <div class="form-check">
+												                  <input th:field="*{Clase_equipo}"id="mecanico" value=2 name="classenergy" type="radio" class="form-check-input" required>
+												                  <label class="col-form-label-sm" for="mecanico">Mecánico</label>
+												                </div>
+												                <div class="form-check">
+												                  <input th:field="*{Clase_equipo}"id="hidraulico" value=3 name="classenergy" type="radio" class="form-check-input" required>
+												                  <label class="col-form-label-sm" for="hidraulico">Hidraúlico</label>
+												                </div>
+												              </div>
+												              
+					                             		</div>
+					                             		<div class="col-sm-6 mb-3 mb-sm-0">
+					                             			<div class="my-3">
+												              	<div class="form-check">
+												                  <input th:field="*{Clase_equipo}"id="neumatico" value=4 name="classenergy" type="radio" class="form-check-input" required>
+												                  <label class="col-form-label-sm" for="neumatico">Neumático</label>
+												                </div>
+												                <div class="form-check">
+												                  <input th:field="*{Clase_equipo}"id="vapor" value=5 name="classenergy" type="radio" class="form-check-input" required>
+												                  <label class="col-form-label-sm" for="vapor">Vapor</label>
+												                </div>
+												                <div class="form-check">
+												                  <input th:field="*{Clase_equipo}"id="solar" value=6 name="classenergy" type="radio" class="form-check-input" required>
+												                  <label class="col-form-label-sm" for="solar">Solar</label>
+												                </div>
+												              </div>
+					                             		</div>
+					                             		
+					                             		
+			                                		</div>
+			                                		<div class = "row">
+			                                			<div class ="col-sm-2 mb-3 mb-sm-0">
+			                                				<label class="mb-3 col-form-label-sm">Equipo</label>
+					                             				
+			                                			</div>
+					                             		<div class="col-sm-10 mb-3 mb-sm-0">
+					                             			
+					                             			<div class="my-3">
+					                             				<div class="form-check form-check-inline">
+													                  <input th:field="*{Equipotipofijo}"id="fijo" value=1 name="fijo" type="radio" class="form-check-input" required>
+													                  <label class="col-form-label-sm" for="fijo">Fijo</label>
+													             </div>
+													             <div class="form-check form-check-inline">
+													                  <input th:field="*{Equipotipofijo}"id="portatil" value=0 name="fijo" type="radio" class="form-check-input" required>
+													                  <label class="col-form-label-sm" for="portatil">Portatil</label>
+													            </div>
+					                             			</div>
+					                             		</div>
+			                                		</div>
+			                                		
+			                                	</div>
+			                             		<div class="col-sm-4 mb-3 mb-sm-0">
+			                             			<label class="mb-3 col-form-label-sm">Biomédica</label>
+			                             			<div class="my-3">
+				                             			<div class="form-check">
+											              <input th:field="*{Clase_biomedica}"class = "form-check-input" type = "radio" name= "TipoBiomedica" id = "inlineRadio1" value = 1 required>
+											              <label class="col-form-label-sm" for= "inlineRadio1">Diagnóstico</label>
+											            </div>     
+											           <div class="form-check">
+											              <input th:field="*{Clase_biomedica}" class = "form-check-input" type = "radio" name= "TipoBiomedica" id = "inlineRadio2" value = 2 required>
+											              <label class="col-form-label-sm" for= "inlineRadio2">Tratamiento y mantenimiento a la vida</label>
+											            </div>  
+											           <div class="form-check">
+											              <input th:field="*{Clase_biomedica}"class = "form-check-input" type = "radio" name= "TipoBiomedica" id = "inlineRadio3" value = 3 required>
+											              <label class="col-form-label-sm" for= "inlineRadio3">Rehabilitación</label>
+											            </div>  
+											           <div class="form-check">
+											              <input th:field="*{Clase_biomedica}"class = "form-check-input" type = "radio" name= "TipoBiomedica" id = "inlineRadio4" value = 4 required>
+											              <label class="col-form-label-sm" for= "inlineRadio4">Prevención</label>
+											            </div>  
+											            <div class="form-check">
+											              <input th:field="*{Clase_biomedica}"class = "form-check-input" type = "radio" name= "TipoBiomedica" id = "inlineRadio5" value = 5 required>
+											              <label class="col-form-label-sm" for= "inlineRadio5">Análisis de laboratorio</label>
+											            </div>  
+			                             			</div>  
+			                             		</div>
+			                                </div>
+			                                <hr>
+			                                <div class = "form-group row">
+			                                	<div class="col-sm-6 mb-3 mb-sm-0">
+			                                		<label class="mb-3 col-form-label-sm">Alimentación</label>
+			                                		<div class = "row">
+			                                			<div class="col-sm-6">
+			                                				<div class="my-3">
+			                                					<div class="form-check">
+													              <input th:field="*{Fuente_energia}"class = "form-check-input" type = "radio" name= "Alimentacion" id = "fe" value = 1 required>
+													              <label class="col-form-label-sm" for= "fe">Electricidad</label>
+													            </div>     
+													            <div class="form-check">
+													              <input th:field="*{Fuente_energia}"class = "form-check-input" type = "radio" name= "Alimentacion" id = "fg" value = 2 required>
+													              <label class="col-form-label-sm" for= "fg">Gas</label>
+													            </div>
+													            <div class="form-check">
+													              <input th:field="*{Fuente_energia}"class = "form-check-input" type = "radio" name= "Alimentacion" id = "fa" value = 3 required>
+													              <label class="col-form-label-sm" for= "fa">Agua</label>
+													            </div>
+													            <div class="form-check">
+													              <input th:field="*{Fuente_energia}"class = "form-check-input" type = "radio" name= "Alimentacion" id = "fva" value = 4 required>
+													              <label class="col-form-label-sm" for= "fva">Vapor de agua</label>
+													            </div>
+			                                				</div>
+			                                			</div>
+			                                			<div class="col-sm-6 mb-3 mb-sm-0">
+			                                				<div class="my-3">
+			                                					<div class="form-check">
+													              <input th:field="*{Fuente_energia}"class = "form-check-input" type = "radio" name= "Alimentacion" id = "fdp" value = 5 required>
+													              <label class="col-form-label-sm" for= "fdp">Derivados del petroleo</label>
+													            </div>
+													            <div class="form-check">
+													              <input th:field="*{Fuente_energia}"class = "form-check-input" type = "radio" name= "Alimentacion" id = "fes" value = 6 required>
+													              <label class="col-form-label-sm" for= "fes">Energia solar</label>
+													            </div>
+													            <div class="form-check">
+													              <input th:field="*{Fuente_energia}"class = "form-check-input" type = "radio" name= "Alimentacion" id = "fo" value = 7 required>
+													              <label class="col-form-label-sm" for= "fo">Otros</label>
+													            </div>
+			                                				</div>
+			                                			</div>
+			                                		</div>
+			                                	</div>
+			                                	<div class="col-sm-6">
+			                                		<label class="mb-3 col-form-label-sm">Adquisición</label>
+			                                		<div class = "row">
+			                                			<div class="col-sm-6 mb-3 mb-sm-0">
+			                                				<div class="my-3">
+			                                					<div class="form-check">
+													              <input th:field="*{Modo_compra}"class = "form-check-input" type = "radio" name= "Alimentacion" id = "fdp" value = 6 required>
+													              <label class="col-form-label-sm" for= "inlineRadio1">Comodato</label>
+													            </div>
+													            <div class="form-check">
+													              <input th:field="*{Modo_compra}"class = "form-check-input" type = "radio" name= "Alimentacion" id = "fdp" value = 4 required>
+													              <label class="col-form-label-sm" for= "inlineRadio1">Asignación ministerio</label>
+													            </div>
+													            <div class="form-check">
+													              <input th:field="*{Modo_compra}"class = "form-check-input" type = "radio" name= "Alimentacion" id = "fdp" value = 2 required>
+													              <label class="col-form-label-sm" for= "inlineRadio1">Convenio</label>
+													            </div>
+			                                				</div>
+			                                			</div>
+			                                			<div class="col-sm-4 mb-3 mb-sm-0">
+			                                				<div class="my-3">
+			                                					<div class="form-check">
+													              <input th:field="*{Modo_compra}"class = "form-check-input" type = "radio" name= "Alimentacion" id = "fdp" value = 1 required>
+													              <label class="col-form-label-sm" for= "inlineRadio1">Compra directa</label>
+													            </div>
+													            <div class="form-check">
+													              <input th:field="*{Modo_compra}"class = "form-check-input" type = "radio" name= "Alimentacion" id = "fdp" value = 5 required>
+													              <label class="col-form-label-sm" for= "inlineRadio1">Asignación gobernación</label>
+													            </div>
+													            <div class="form-check">
+													              <input th:field="*{Modo_compra}"class = "form-check-input" type = "radio" name= "Alimentacion" id = "fdp" value = 3 required>
+													              <label class="col-form-label-sm" for= "inlineRadio1">Donado</label>
+													            </div>
+			                                				</div>
+			                                			</div>
+			                                			
+			                                		</div>
+			                                	</div>
+			                                </div>
+
+			                                <hr>
+			                                	<h6 class="mb-3 form-label-sm">Institución</h6>
+			                                <div class = "form-group row">
+			                                	
+			                                	<div class="col-sm-6 mb-3 mb-sm-0">
+            										<input type = "email" placeholder = "Ingrese E-mail" class="form-control form-control-user" onkeyup="mayus(this);" th:field="*{Emailinstitucion}"></input>		                      					
+			                      				</div>
+			                      				<div class="col-sm-6 mb-3 mb-sm-0">
+            										<input type = "text" placeholder = "Ingrese código internacional" class="form-control form-control-user" onkeyup="mayus(this);" th:field="*{Codinternacional}"></input>		                      					
+			                      				</div>
+			                      				
+			                      				
+			                                </div>
+			                                <hr>
+			                                <h6 class="mb-3 form-label-sm">Técnicos</h6>
+			                                <div class = "form-group row">
+			                                
+			                                	<div class="col-sm-6 mb-3">
+			                                		<div class="input-group">
+            											<input type = "text" placeholder = "Ingrese voltaje máximo" th:field="*{Vmaxoperacion}" class="form-control form-control-user" onkeyup="mayus(this);">                      					
+			                                			<span class="input-group-text">V</span>
+			                                		</div>
+			                      				</div>
+			                      				<div class="col-sm-6 mb-3 mb-sm-0">
+			                      					<div class="input-group">
+            											<input type = "text" placeholder = "Ingrese voltaje mínimo" th:field="*{Vminoperacion}"class="form-control form-control-user" onkeyup="mayus(this);">	                      					
+			                      						<span class="input-group-text">V</span>
+			                      					</div>
+			                      				</div>
+			                      				<div class="col-sm-6 mb-3">
+			                      					<div class="input-group">
+            											<input type = "text" placeholder = "Ingrese corriente máxima" th:field="*{Imaxoperacion}"class="form-control form-control-user" onkeyup="mayus(this);">		                      					
+			                      						<span class="input-group-text">A</span>
+			                      					</div>
+			                      				</div>
+			                      				<div class="col-sm-6 mb-3 mb-sm-0">
+			                      					<div class="input-group">
+            											<input type = "text" placeholder = "Ingrese corriente mínima"th:field="*{Iminoperacion}" class="form-control form-control-user" onkeyup="mayus(this);">		                      					
+			                      						<span class="input-group-text">A</span>
+			                      					</div>
+			                      				</div>
+			                      				<div class="col-sm-6 mb-3">
+			                      					<div class="input-group">
+            											<input type = "text" placeholder = "Ingrese potencia consumida"th:field="*{Wconsumida}" class="form-control form-control-user" onkeyup="mayus(this);">		                      					
+			                      						<span class="input-group-text">W</span>
+			                      					</div>
+			                      				</div>
+			                      				<div class="col-sm-6 mb-3 mb-sm-0">
+			                      					<div class="input-group">
+            											<input type = "text" placeholder = "Ingrese frecuencia"th:field="*{Frecuencia}" class="form-control form-control-user" onkeyup="mayus(this);">	                      					
+			                      						<span class="input-group-text">Hz</span>
+			                      					</div>
+			                      				</div>
+			                      				<div class="col-sm-6 mb-3">
+			                      					<div class="input-group">
+            											<input type = "text" placeholder = "Ingrese presión"th:field="*{Presion}" class="form-control form-control-user" onkeyup="mayus(this);">		                      					
+			                      						<span class="input-group-text">PSI</span>
+			                      					</div>
+			                      				</div>
+			                      				<div class="col-sm-6 mb-3 mb-sm-0">
+			                      					<div class="input-group">
+            											<input type = "text" placeholder = "Ingrese velocidad"th:field="*{Velocidad}" class="form-control form-control-user" onkeyup="mayus(this);">		                      					
+			                      						<span class="input-group-text">RPM</span>
+			                      					</div>
+			                      				</div>
+			                      				<div class="col-sm-6 mb-3">
+			                      					<div class="input-group">
+            											<input type = "text" placeholder = "Ingrese temperatura"th:field="*{Temperatura}" class="form-control form-control-user" onkeyup="mayus(this);">	                      					
+			                      						<span class="input-group-text">°C</span>
+			                      					</div>
+			                      				</div>
+			                      				<div class="col-sm-6 mb-3 mb-sm-0">
+			                      					<div class="input-group">
+            											<input type = "text" placeholder = "Ingrese peso"th:field="*{Peso}" class="form-control form-control-user" onkeyup="mayus(this);">	                      					
+			                      						<span class="input-group-text">Kg</span>
+			                      					</div>
+			                      				</div>
+			                      				<div class="col-sm-6 mb-3">
+			                      					<div class="input-group">
+            											<input type = "text" placeholder = "Ingrese capacidad "th:field="*{Capacidad}" class="form-control form-control-user" onkeyup="mayus(this);">		                      					
+			                      						<span class="input-group-text">L</span>
+			                      					</div>
+			                      				</div>
+			                      				<div class="col-sm-6 mb-3 mb-sm-0">
+            										<input type = "text" placeholder = "Ingrese otros datos"th:field="*{Otrosdatostecnicos}" class="form-control form-control-user" onkeyup="mayus(this);">	                      					
+			                      				</div>
+			                      				
+			                                </div>
+			                                <hr>
+			                                <h6 class="mb-3 form-label-sm">Compra</h6>
+			                                <div class = "form-group row">
+			                                	
+			                                	<div class="col-sm-6 mb-3">
+            										<input type = "text" placeholder = "Ingrese fabricante"th:field="*{Fabricante}" class="form-control form-control-user" onkeyup="mayus(this);">	                      					
+			                      				</div>
+			                      				<div class="col-sm-6 mb-3 mb-sm-0">
+            										<input type = "text" placeholder = "Ingrese pais del fabricante"th:field="*{Paisfabricante}" class="form-control form-control-user" onkeyup="mayus(this);">	                      					
+			                      				</div>
+			                      				<div class="col-sm-6 mb-3">
+            										<input type = "text" placeholder = "Ingrese proveedor"th:field="*{Proveedor}" class="form-control form-control-user" onkeyup="mayus(this);">	                      					
+			                      				</div>
+			                      				<div class="col-sm-6 mb-3 mb-sm-0">
+            										<input type = "text" placeholder = "Ingrese teléfono proveedor"th:field="*{Telefonoproveedor}" class="form-control form-control-user" onkeyup="mayus(this);">	                      					
+			                      				</div>
+			                      				<div class="col-sm-6 mb-3">
+            										<input type = "text" placeholder = "Ingrese correo proveedor"th:field="*{Correoproveedor}" class="form-control form-control-user" onkeyup="mayus(this);">	                      					
+			                      				</div>
+			                      				<div class="col-sm-6 mb-3 mb-sm-0">
+            										<input type = "text" placeholder = "Ingrese ciudad proveedor"th:field="*{Ciudadproveedor}" class="form-control form-control-user" onkeyup="mayus(this);">	                      					
+			                      				</div>
+			                      				<div class="col-sm-6 mb-3">
+            										<input type = "text" placeholder = "Ingrese represante"th:field="*{Representante}" class="form-control form-control-user" onkeyup="mayus(this);">	                      					
+			                      				</div>
+			                      				<div class="col-sm-6 mb-3 mb-sm-0">
+            										<input type = "text" placeholder = "Ingrese teléfono representante"th:field="*{Telefonorepresentante}" class="form-control form-control-user" onkeyup="mayus(this);">	                      					
+			                      				</div>
+			                      				<div class="col-sm-6 mb-3 mb-sm-0">
+            										<input type = "text" placeholder = "Ingrese el costo"th:field="*{Costo_compra}" class="form-control form-control-user" onkeyup="mayus(this);">	                      					
+			                      				</div>
+			                      				<div class="col-sm-6 mb-3 mb-sm-0">
+            										<input type = "text" placeholder = "Ingrese permiso"th:field="*{Contrato}" class="form-control form-control-user" onkeyup="mayus(this);">	                      					
+			                      				</div>
+			                                </div>
+			                                <hr>
+			                                <div class = "form-group row">
+			                                	<div class="col-sm-4 mb-3 mb-sm-0">
+			                                		<label class="mb-3 form-label-sm">Uso</label>
+	                                				<div class="my-3">
+	                                					<div class="form-check form-check-inline">
+											              <input th:field="*{Uso}"class = "form-check-input" type = "radio" name= "Uso" id = "medic" value = 1 required>
+											              <label class="col-form-label-sm" for= "medic">Médico</label>
+											            </div>
+											            <div class="form-check form-check-inline">
+											              <input th:field="*{Uso}"class = "form-check-input" type = "radio" name= "Uso" id = "basic" value = 2 required>
+											              <label class="col-form-label-sm" for= "basic">Básico</label>
+											            </div>
+											            <div class="form-check form-check-inline">
+											              <input th:field="*{Uso}"class = "form-check-input" type = "radio" name= "Uso" id = "apoyo" value = 3 required>
+											              <label class="col-form-label-sm" for= "apoyo">Apoyo</label>
+											            </div>
+	                                				</div>
+	                                			</div>
+	                                			<div class="col-sm-4 mb-3 mb-sm-0">
+	                                				<label class="mb-3 form-label-sm">Calibración</label>
+	                                				<div class="my-3">
+	                                					<div class="form-check form-check-inline">
+	                                						<input th:field="*{Requierecalibracion}"class = "form-check-input" type = "radio" name= "Uso" id = "apoyo" value = 1 required>
+											              	<label class="col-form-label-sm" for= "apoyo">Si</label>
+	                                					</div>
+	                                					<div class="form-check form-check-inline">
+											              	<input th:field="*{Requierecalibracion}"class = "form-check-input" type = "radio" name= "Uso" id = "apoyo" value = 0 required>
+											              	<label class="col-form-label-sm" for= "apoyo">No</label>
+	                                					</div>
+	                                				</div>
+	                                			</div>
+	                                			<div class="col-sm-4 mb-3 mb-sm-0">
+	                                				<label class="mb-3 form-label-sm">Validación</label>
+	                                				<div class="my-3">
+	                                					<div class="form-check form-check-inline">
+	                                						<input th:field="*{calval}"class = "form-check-input" type = "radio" name= "Uso" id = "apoyo" value = 1 required>
+											              	<label class="col-form-label-sm" for= "apoyo">Si</label>
+	                                					</div>
+	                                					<div class="form-check form-check-inline">
+											              	<input th:field="*{calval}"class = "form-check-input" type = "radio" name= "Uso" id = "apoyo" value = 0 required>
+											              	<label class="col-form-label-sm" for= "apoyo">No</label>
+	                                					</div>
+	                                				</div>
+	                                			</div>
+			                                </div>
+			                                <hr class="featurette-divider">
+			                                <div class = "form-group row">
+												<div class="col-sm-4 mb-3 mb-sm-0">
+			                                		<div class="form-group">
+														<label class="mb-3 form-label-sm">Descripcion</label>
+    													<textarea class="form-control"th:field="*{Descripcion}" id="exampleFormControlTextarea1" rows="4"onkeyup="mayus(this);"></textarea>
+  													</div>
+  													<div class="input-group">
+										                <span class="input-group-text"> Accesorio 1</span>
+										                <input type="text"th:field="*{Accesorio1}" name="" class="form-control" id = "accesorio1" placeholder="Introduzca el accesorio 1" value=""required>
+										              </div>
+										              <div class="input-group">
+										                <span class="input-group-text"> Accesorio 4</span>
+										                <input type="text"th:field="*{Accesorio4}" name="" class="form-control" id = "accesorio1" placeholder="Introduzca el accesorio 1" value=""required>
+										              </div>
+  													
+	                                			</div>
+	                                			<div class="col-sm-4 mb-3 mb-sm-0">
+			                                		<div class="form-group">
+														<label class="mb-3 form-label-sm">Recomendaciones</label>
+    													<textarea class="form-control" th:field="*{Recomendacion}"id="exampleFormControlTextarea1" rows="4"onkeyup="mayus(this);"></textarea>
+  													</div>
+  													<div class="input-group">
+										                <span class="input-group-text">Accesorio 2</span>
+										                <input type="text"th:field="*{Accesorio2}" name="" class="form-control" id = "accesorio1" placeholder="Introduzca el accesorio 2" value=""required>
+										              </div>
+	                                			</div>
+	                                			<div class="col-sm-4 mb-3 mb-sm-0">
+			                                		
+	                                				<div class="form-group">
+														<label class="mb-3 form-label-sm">Observaciones</label>
+    													<textarea class="form-control" th:field="*{Observacion}"id="exampleFormControlTextarea1" rows="4"onkeyup="mayus(this);"></textarea>
+  													</div>
+  													<div class="input-group">
+										                <span class="input-group-text">Accesorio 3</span>
+										                <input type="text"th:field="*{Accesorio3}" name="" class="form-control" id = "accesorio1" placeholder="Introduzca el accesorio 3" value=""required>
+										              </div>
+											            
+	                                			</div>
+											</div>
+			                                <hr>
+			                                <div class = "form-group row">
+			                                	<hr class="my-4">
+										          <h4 class="mb-3">Foto del equipo</h4>        
+											        <label class="form-label" for="customFile">Subir</label>
+											        <input type="file" class="form-control" name ="foto" id="customFile" accept="image/*">
+										  
+										          <hr class="featurette-divider">
+			                                </div>
+			     
+			                            
+			                                <div class = "form-group row">
+			                                	
+			                                	<div class="col-sm-12 mb-3 mb-sm-0">
+			                                		<button type = "submit" class="btn btn-primary btn-user btn-block">
+					                                    Guardar
+					                                </button>
+			                                	</div>
+			                                	
+			                                
+			                                </div>
+			                                <hr>
+			                              
+			                            </form>
+			                      
+			                        
+			                        </div>
+			                    </div>
+			                </div>
+			            </div>
+			        </div>
+			
+			    </div>
+
+
+                  
+
+                
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Mantory 2022-2023</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Cerrar sesión</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript-->
+   	<script th:inline = "javascript">
+/*<![CDATA[*/
+	var fechac = /*[[${boughtdate}]]*/ 'default';
+	var fechains = /*[[${installdate}]]*/ 'default';
+	var fechainicio = /*[[${startdate}]]*/ 'default';
+	var fechavcto = /*[[${vctodate}]]*/ 'default';
+	var fechafab = /*[[${fabdate}]]*/ 'default';
+	
+	var fechacinput = document.getElementById("fc");
+
+	var fechainsinput = document.getElementById("fi");
+	var fechainicioinput = document.getElementById("fo");
+	var fechavctoinput = document.getElementById("fv");
+	var fechafabinput = document.getElementById("fabdate")
+	
+	fechacinput.value = fechac;
+	fechainsinput.value = fechains;
+	fechainicioinput.value = fechainicio;
+	fechavctoinput.value = fechavcto;
+	fechafabinput.value = fechafab;
+/*]]>*/
+</script>
+ 
+
+    <script th:src="@{/js/jquery.easing.min.js}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script th:src="@{/js/sb-admin-2.min.js}"></script>
+	<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
+</body>
+
+</html>

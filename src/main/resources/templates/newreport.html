@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Nuevo mantenimiento</title>
+
+    <!-- Custom fonts for this template-->
+    <link rel="stylesheet" th:href="@{/font/bootstrap-icons.css}">
+	<link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+	<script type="text/javascript" th:src="@{/js/jquery-3.6.0.min.js}"></script>
+   	<link th:href="@{/css/sb-admin-2.css}" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+</head>
+
+<body class="bg-gradient-primary">
+	<!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" th:href = "@{/home}">
+                <div class="sidebar-brand-icon rotate-n-15">
+               
+                    <div class="icon">
+				      <i class="bi bi-table"></i>
+				      
+				    </div>
+                </div>
+                <div class="sidebar-brand-text mx-3">Mantory</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Principales
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    
+				      <i class="bi bi-hospital-fill"></i>
+				      
+				
+                    <span>Instituciones</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Instituciones activas</h6>
+                        <div th:each = "institution:${institutions}">
+                        	<a class="collapse-item" th:href="@{/devicesbyin/}+${institution.id_Institution}" th:text="${institution.Nombre}"></a>
+                        </div>
+        
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="bi bi-pencil-square"></i>
+                    <span>Crear</span>
+                </a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Selecciona lo que quieres crear</h6>
+                        <a class="collapse-item" th:href="@{/newinstitution}">Institución</a>
+                        <a class="collapse-item" href="utilities-border.html">Equipos</a>
+                        <a class="collapse-item" href="utilities-border.html">Plan</a>
+                       	<a class="collapse-item" th:href="@{/newservice}">Servicio</a>
+                       	<a class="collapse-item" th:href="@{/newtypes}">Tipo equipo</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Funciones adicionales
+
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Resumen mensual</span>
+                </a>
+                
+            </li>
+
+            <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="charts.html">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Gráficas</span></a>
+            </li>
+
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="tables.html">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Informes</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle">
+                </button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Search -->
+                    <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Search for..." aria-label="Search"
+                                            aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+
+                        <!-- Nav Item - Alerts -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell fa-fw"></i>
+                                <!-- Counter - Alerts -->
+                                <span class="badge badge-danger badge-counter">3+</span>
+                            </a>
+                            <!-- Dropdown - Alerts -->
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="alertsDropdown">
+                                <h6 class="dropdown-header">
+                                    Alerts Center
+                                </h6>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-primary">
+                                            <i class="fas fa-file-alt text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 12, 2019</div>
+                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-success">
+                                            <i class="fas fa-donate text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 7, 2019</div>
+                                        $290.29 has been deposited into your account!
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-warning">
+                                            <i class="fas fa-exclamation-triangle text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 2, 2019</div>
+                                        Spending Alert: We've noticed unusually high spending for your account.
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                            </div>
+                        </li>
+
+                        <!-- Nav Item - Messages -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-envelope fa-fw"></i>
+                                <!-- Counter - Messages -->
+                                <span class="badge badge-danger badge-counter">7</span>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="messagesDropdown">
+                                <h6 class="dropdown-header">
+                                    Message Center
+                                </h6>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                                            alt="...">
+                                        <div class="status-indicator bg-success"></div>
+                                    </div>
+                                    <div class="font-weight-bold">
+                                        <div class="text-truncate">Hi there! I am wondering if you can help me with a
+                                            problem I've been having.</div>
+                                        <div class="small text-gray-500">Emily Fowler · 58m</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
+                                            alt="...">
+                                        <div class="status-indicator"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">I have the photos that you ordered last month, how
+                                            would you like them sent to you?</div>
+                                        <div class="small text-gray-500">Jae Chun · 1d</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
+                                            alt="...">
+                                        <div class="status-indicator bg-warning"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">Last month's report looks great, I am very happy with
+                                            the progress so far, keep up the good work!</div>
+                                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
+                                            alt="...">
+                                        <div class="status-indicator bg-success"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
+                                            told me that people say this to all dogs, even if they aren't good...</div>
+                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                            </div>
+                        </li>
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Wilson Camargo</span>
+                                <img class="img-profile rounded-circle"
+                                    src="img/undraw_profile.svg">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Perfil
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Configuraciones
+                                </a>
+                               
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Cerrar sesión
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Bootstrap core JavaScript-->
+			    <div class="container">
+			
+			        <div class="card o-hidden border-0 shadow-lg my-5">
+			            <div class="card-body p-0">
+			                <!-- Nested Row within Card Body -->
+			                <div class="row">
+		
+			                    <div class="col-lg-12">
+			                        <div class="p-5">
+			                            <div class="text-center">
+			                                <h1 class="h4 text-gray-900 mb-4">Nuevo mantenimiento</h1>
+			                            </div>
+			                            <form class="user needs-validation" id = "formReport"th:action = "@{/newreport/}+${device.id_Device}"th:object="${report}"enctype = "multipart/form-data" method="post"validate>
+			                                <div class="form-group row">
+			                                    <div class="col-sm-3 mb-3 mb-sm-0">
+			                                    <label for= "fecha" class="col-form-label-sm">Fecha</label>
+			                                        <input type="date"th:name="fecha" class="form-control form-control-user" id="fecha"
+			                                            placeholder="Fecha de mantentimiento" required>
+			                                    </div>
+			                                    <div class="col-sm-3 mb-3 mb-sm-0">
+			                                         <label for= "llamadotime" class="col-form-label-sm">Hora de llamado</label>
+              										 <input th:name= "hora_llamado" placeholder= "Selected time" type="time" id = "llamadotime"class="form-control form-control-user">
+       
+			                                    </div>
+			                                    <div class="col-sm-3">
+				                                        <label for= "tsrattime" class="col-form-label-sm">Hora de inicio</label>
+              										 <input th:name= "hora_inicio" placeholder= "Selected time" type="time" id = "input_starttime"class="form-control form-control-user">
+       
+				                                    </div>
+				                                    <div class="col-sm-3">
+				                                        <label for= "llamadotime" class="col-form-label-sm">Hora de terminación</label>
+              										 <input th:name= "hora_finalizacion" placeholder= "Selected time" type="time" id = "input_finaltime"class="form-control form-control-user">
+       
+				                                    </div>
+			                                </div>
+			                                <hr>
+			                                <div class = "form-group row">
+												<div class = "col-sm-6">
+													<ul class="list-group list-group-flush">
+														<li class = "list-group-item"th:text="'Equipo: '+${device.Name_device}"></li>
+														<li class = "list-group-item" th:text="'Marca: '+${device.Marca}"></li>
+														<li class = "list-group-item" th:text="'Modelo: '+${device.Modelo}"></li>
+														<li class = "list-group-item" th:text="'Serie:' +${device.Serie}"></li>
+													</ul>
+												</div>
+												<div class = "col-sm-6">
+														<label class="col-form-label-sm">Motivo</label>
+		            								<textarea class="form-control form-control-user" rows ="2"onkeyup="mayus(this);" th:field="*{Motivo}" required></textarea>
+		
+												</div>
+											</div>
+			                                <hr>
+			                                <div class="form-group row">
+			                             		<div class="col-sm-6 mb-3 mb-sm-0">
+			                             			<label class="mb-3 col-form-label-sm">Tipo de mantenimiento</label>            
+										              <div class="my-3">
+										                <div class="form-check form-check-inline">
+										                  <input th:field="*{Tipo_mantenimiento}"id="Predictivo" value=4 name="paymentMethod" type="radio" class="form-check-input" required>
+										                  <label class="col-form-label-sm" for="Predictivo">Predictivo</label>
+										                </div>
+										                <div class="form-check form-check-inline">
+										                  <input th:field="*{Tipo_mantenimiento}"id="Preventivo" value=3 name="paymentMethod" type="radio" class="form-check-input" required>
+										                  <label class="col-form-label-sm" for="Preventivo">Preventivo</label>
+										                </div>
+										                <div class="form-check form-check-inline">
+										                  <input th:field="*{Tipo_mantenimiento}"id="Correctivo" value=2 name="paymentMethod" type="radio" class="form-check-input" required>
+										                  <label class="col-form-label-sm" for="Correctivo">Correctivo</label>
+										                </div>
+										                
+										                <div class="form-check form-check-inline">
+										                  <input th:field="*{Tipo_mantenimiento}"id="Otro" value=1 name="paymentMethod" type="radio" class="form-check-input" required>
+										                  <label class="col-form-label-sm" for="Otro">Otro</label>
+										                </div>
+										                <div class = "form-check form-check-inline">
+										                	<label id= "tfslabel" class="col-form-label-sm" for="tfs">Tiempo fuera de servicio (días)</label>
+										                	<input id="tfs" th:field="*{Tiempo_fuera_servicio}"type="number" step="1" min="0" max="365"class="form-control" placeholder="Dias fuera de servicio">               
+										                </div>
+										              </div>
+			                             		</div>
+			                             		<div class="col-sm-6 mb-3 mb-sm-0">
+			                             			<label class="mb-3 col-form-label-sm">Tipo de falla</label>
+			                             			<div class="my-3">
+				                             			<div class="form-check form-check-inline">
+											              <input th:field="*{Tipo_falla}"class = "form-check-input" type = "radio" name= "TipoFalla" id = "inlineRadio1" value = 1 required>
+											              <label class="= form-check-label" for= "inlineRadio1">1</label>
+											            </div>     
+											           <div class="form-check form-check-inline">
+											              <input th:field="*{Tipo_falla}" class = "form-check-input" type = "radio" name= "TipoFalla" id = "inlineRadio2" value = 2 required>
+											              <label class="= form-check-label" for= "inlineRadio2">2</label>
+											            </div>  
+											           <div class="form-check form-check-inline">
+											              <input th:field="*{Tipo_falla}"class = "form-check-input" type = "radio" name= "TipoFalla" id = "inlineRadio3" value = 3 required>
+											              <label class="= form-check-label" for= "inlineRadio3">3</label>
+											            </div>  
+											           <div class="form-check form-check-inline">
+											              <input th:field="*{Tipo_falla}"class = "form-check-input" type = "radio" name= "TipoFalla" id = "inlineRadio4" value = 4 required>
+											              <label class="= form-check-label" for= "inlineRadio4">4</label>
+											            </div>  
+			                             			</div>  
+			                             		</div>
+			                                </div>
+
+			                                <hr>
+			                                <div id = "rutinapreventivo">
+												<div class="form-group row">
+													
+														<label class="mb-3 col-form-label-sm">Protocolo de mantenimiento</label>
+			                             				<div class = "col-xl-12">
+														<div class="table-responsive">
+															
+															<table class = "table">
+																<thead>
+																	<tr>
+																		<th>Actividad</th>
+																		<th>Cumple</th>
+																		<th>Observación</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<tr th:each= "protocolo,iter:${protocolos}">
+																		<td th:text="${protocolo.Paso}"></td>
+																		<td>
+																			<input type="checkbox"  th:name= "pasosrutinas" th:value = "${protocolo.id_Protocols}" class="form-control-user">
+																		</td>
+																		<td>
+																			<input type = "text" th:name = "observacionesrutinas" class="form-control form-control-user" onkeyup="mayus(this);" required>
+			                      					
+																		</td>
+																	</tr>
+																</tbody>
+															</table>
+															
+														</div>
+														</div>
+											
+												</div>
+												
+												<hr>
+												
+											</div>
+			                                
+			                            	<div class="form-group row">
+			                            		<div class="col-sm-6 mb-3 mb-sm-0">
+			                            			<label class="col-form-label-sm">Trabajo realizado</label>
+		            								<textarea class="form-control form-control-user" rows ="7"onkeyup="mayus(this);" th:field="*{Trabajo_realizado}" required></textarea>
+		
+			                            		</div>
+			                            		<div class="col-sm-6 mb-3 mb-sm-0">
+			                            			<label  class="col-form-label-sm">Repuesto cambiado</label>
+            										<input type = "text" class="form-control form-control-user" onkeyup="mayus(this);" th:field="*{Repuesto_cambiado}"></input>
+													<label  class="col-form-label-sm">Cantidad de repuestos</label>
+            										<input type = "text" class="form-control form-control-user" onkeyup="mayus(this);" th:field="*{Cantidad_repuesto}"></input>
+													
+													<label  class="col-form-label-sm">Observaciones</label>
+            										<input type = "text" class="form-control form-control-user" onkeyup="mayus(this);" th:field="*{Observaciones}" required></input>
+
+			                            		</div>
+			                            	</div>
+			                                 <div class="form-group row">
+			                      				<div class="col-sm-6 mb-3 mb-sm-0">
+			                      				
+			                            			<label  class="col-form-label-sm">Responsable del mantenimiento</label>
+            										<input type = "text" class="form-control form-control-user" onkeyup="mayus(this);" th:field="*{Responsable}"></input>
+			                      					
+			                      				</div>
+			                               		<div class="col-sm-6 mb-3 mb-sm-0">
+			                      				
+			                            			<label  class="col-form-label-sm">Quien recibe el equipo</label>
+            										<input type = "text" class="form-control form-control-user" onkeyup="mayus(this);" th:field="*{Autor_recibido}"></input>
+			                      					
+			                      				</div>
+			                                 
+			                                </div>
+			                                <div class = "form-group row">
+												<div class="form-group">
+												  <label for="firmaEjecutorCanvas">Firma del ejecutor del servicio</label>
+												  <canvas id="firmaEjecutorCanvas" width="300" height="100" style="border: 1px solid #000;"></canvas>
+												  <input type="hidden" id="firmaEjecutorBase64" name="firmaEjecutorBase64" />
+												  <button type="button"class="btn btn-secondary" onclick="limpiarCanvasFirma('firmaEjecutorCanvas')">Limpiar firma</button>
+												</div>
+
+												<!-- Firma del receptor -->
+												<div class="form-group">
+												  <label for="firmaReceptorCanvas">Firma del receptor del servicio</label>
+												  <canvas id="firmaReceptorCanvas" width="300" height="100" style="border: 1px solid #000;"></canvas>
+												  <input type="hidden" id="firmaReceptorBase64" name="firmaReceptorBase64" />
+												  <button type="button" class="btn btn-secondary" onclick="limpiarCanvasFirma('firmaReceptorCanvas')">Limpiar firma</button>
+												</div>
+											</div>
+			                                <div class = "form-group row">
+			                                	
+			                                	<div class="col-sm-12 mb-3 mb-sm-0">
+			                                		<button type = "submit" class="btn btn-primary btn-user btn-block">
+					                                    Guardar
+					                                </button>
+			                                	</div>
+			                                	
+			                                
+			                                </div>
+			                                <hr>
+			                              
+			                            </form>
+			                      
+			                        
+			                        </div>
+			                    </div>
+			                </div>
+			            </div>
+			        </div>
+			
+			    </div>
+
+
+                  
+
+                
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Mantory 2022-2023</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Cerrar sesión</a>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+    
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+		    // Inicializar los canvas de firma
+		    inicializarCanvasFirma("firmaEjecutorCanvas", "firmaEjecutorBase64");
+		    inicializarCanvasFirma("firmaReceptorCanvas", "firmaReceptorBase64");
+		
+		    // Función para limpiar canvas y su input oculto asociado
+		    window.limpiarCanvasFirma = function (canvasId) {
+		        const canvas = document.getElementById(canvasId);
+		        const ctx = canvas.getContext("2d");
+		        ctx.clearRect(0, 0, canvas.width, canvas.height);
+		
+		        const hiddenInputId = canvasId.replace("Canvas", "Base64");
+		        const hiddenInput = document.getElementById(hiddenInputId);
+		        if (hiddenInput) {
+		            hiddenInput.value = "";
+		        }
+		    };
+		
+		    // Captura automática de firmas al enviar el formulario
+		    const formulario = document.getElementById("formReport");
+		    if (formulario) {
+		        formulario.addEventListener("submit", function () {
+		            ["firmaEjecutorCanvas", "firmaReceptorCanvas"].forEach((canvasId) => {
+		                const canvas = document.getElementById(canvasId);
+		                const hiddenInputId = canvasId.replace("Canvas", "Base64");
+		                const hiddenInput = document.getElementById(hiddenInputId);
+		                if (canvas && hiddenInput) {
+		                    const base64 = canvas.toDataURL("image/png");
+		                    hiddenInput.value = base64;
+		                }
+		            });
+		        });
+		    }
+		});
+		
+		// Función que inicializa la captura de firma en un canvas
+		function inicializarCanvasFirma(canvasId, hiddenInputId) {
+		    const canvas = document.getElementById(canvasId);
+		    if (!canvas) return;
+		
+		    const ctx = canvas.getContext("2d");
+		    let dibujando = false;
+		
+		    function getPosition(e) {
+		        const rect = canvas.getBoundingClientRect();
+		        return {
+		            x: (e.clientX || e.touches?.[0].clientX) - rect.left,
+		            y: (e.clientY || e.touches?.[0].clientY) - rect.top
+		        };
+		    }
+		
+		    canvas.addEventListener("mousedown", (e) => {
+		        dibujando = true;
+		        const { x, y } = getPosition(e);
+		        ctx.beginPath();
+		        ctx.moveTo(x, y);
+		    });
+		
+		    canvas.addEventListener("mousemove", (e) => {
+		        if (!dibujando) return;
+		        const { x, y } = getPosition(e);
+		        ctx.lineTo(x, y);
+		        ctx.stroke();
+		    });
+		
+		    canvas.addEventListener("mouseup", () => dibujando = false);
+		    canvas.addEventListener("mouseleave", () => dibujando = false);
+		
+		    canvas.addEventListener("touchstart", (e) => {
+		        e.preventDefault();
+		        dibujando = true;
+		        const { x, y } = getPosition(e);
+		        ctx.beginPath();
+		        ctx.moveTo(x, y);
+		    }, { passive: false });
+		
+		    canvas.addEventListener("touchmove", (e) => {
+		        e.preventDefault();
+		        if (!dibujando) return;
+		        const { x, y } = getPosition(e);
+		        ctx.lineTo(x, y);
+		        ctx.stroke();
+		    }, { passive: false });
+		
+		    canvas.addEventListener("touchend", () => dibujando = false);
+		}
+
+		$("#tfs").hide();
+		$("#tfslabel").hide();
+		$("#rutinapreventivo").hide();
+		$(document).ready(function(){
+		 $('#Correctivo').on('change',function(){
+			
+			
+			
+		    if (document.getElementById("Correctivo").checked) {
+		     $("#tfs").show();
+			 $("#tfslabel").show();
+			 $("#rutinapreventivo").hide();
+			 
+		     
+		    }
+		    
+		   
+		    
+		  })
+		  $('#Preventivo').on('change',function(){
+			if(document.getElementById("Preventivo").checked){
+				$("#tfs").hide();
+			 	$("#tfslabel").hide();
+			 	$("#rutinapreventivo").show();
+			}  
+		  })
+		  $('#Predictivo').on('change',function(){
+			if(document.getElementById("Predictivo").checked){
+				$("#tfs").hide();
+			 	$("#tfslabel").hide();
+			 	$("#rutinapreventivo").hide();
+			}  
+		  })
+		  $('#Otro').on('change',function(){
+			if(document.getElementById("Otro").checked){
+				$("#tfs").hide();
+			 	$("#tfslabel").hide();
+			 	$("#rutinapreventivo").hide();
+			}  
+		  })
+		  
+		  
+		});
+	
+		
+		
+	</script>
+    <!-- Bootstrap core JavaScript-->
+   
+ 
+
+    <script th:src="@{/js/jquery.easing.min.js}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script th:src="@{/js/sb-admin-2.min.js}"></script>
+	<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
+</body>
+
+</html>

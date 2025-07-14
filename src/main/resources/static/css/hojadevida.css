@@ -1,0 +1,131 @@
+}html,
+body {
+  overflow-x: hidden; /* Prevent scroll on narrow devices */
+}
+
+body {
+  padding-top: 56px;
+}
+
+@media (max-width: 991.98px) {
+  .offcanvas-collapse {
+    position: fixed;
+    top: 56px; /* Height of navbar */
+    bottom: 0;
+    left: 100%;
+    width: 100%;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    overflow-y: auto;
+    visibility: hidden;
+    background-color: #343a40;
+    transition: transform .3s ease-in-out, visibility .3s ease-in-out;
+  }
+  .offcanvas-collapse.open {
+    visibility: visible;
+    transform: translateX(-100%);
+  }
+}
+
+.nav-scroller {
+  position: relative;
+  z-index: 2;
+  height: 2.75rem;
+  overflow-y: hidden;
+}
+
+.nav-scroller .nav {
+  display: flex;
+  flex-wrap: nowrap;
+  padding-bottom: 1rem;
+  margin-top: -1px;
+  overflow-x: auto;
+  color: rgba(255, 255, 255, .75);
+  text-align: center;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+.nav-underline .nav-link {
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  font-size: .875rem;
+  color: #6c757d;
+}
+
+.nav-underline .nav-link:hover {
+  color: #007bff;
+}
+.container-fluid{
+  font-size: 20px;
+}
+.list-group{
+  border-color: solid black;
+  outline: 1px solid black;
+  border: 1px solid black;
+}
+ul,li{
+  border-color: solid black;
+  outline: 1px solid black;
+  border: 1px solid black;
+}
+input:enabled{
+  color:#1C0D02;
+  border: 1px solid #1C0D02;
+}
+input:disabled{
+  color:black;
+  border: 1px solid black;
+  font-color: solid black;
+  
+
+}
+
+.form-check-input{
+  border-color: solid black;
+  outline: 1px solid black;
+  border: 1px solid black;
+}
+.nav-underline .active {
+  font-weight: 500;
+  color: #343a40;
+}
+
+.text-white-50 { color: rgba(255, 255, 255, .5); }
+
+.bg-purple { background-color: #6f42c1; }
+#content{
+  overflow-y: auto;
+  height: 100vh;
+  padding-bottom: 5rem;
+}
+.ph-center{
+  height: 100px;
+}
+.ph-center::-webkit-input-placeholder{
+  text-align: center;
+  line-height: 100px;
+}
+table{
+  border: 2px solid black;
+  border-left: 2px solid black;
+  border-top: 2px solid black;
+  border-right: 2px solid black;
+  height: 30px;
+
+  color: black;
+  border-collapse: collapse;
+  line-height: 150%;
+}
+th,td{
+  border: 2px solid black;
+  border-left: 2px solid black;
+  border-top: 2px solid black;
+  border-right: 2px solid black;
+  border-collapse: collapse;
+}
+#miid::placeholder{
+  color: black;
+  text-align: center;
+  padding-top: 30px;
+}
