@@ -59,35 +59,22 @@ public class SecurityConfig{
  
     
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-            .csrf().disable()
-            .cors().disable()
-            .headers(headers -> headers
-                .frameOptions().sameOrigin() // ← esto permite los <iframe> desde la misma app
-            )
-            .authorizeHttpRequests(auth -> auth
-                .antMatchers("/", "/css/**", "/js/**", "/images/**", "/scss/**", "/files/**").permitAll()
-                .anyRequest().authenticated()
-            )
-            .formLogin(form -> form
-                .loginPage("/signin")
-                .permitAll()
-                .defaultSuccessUrl("/home")
-                .failureUrl("/signin?error=true")
-                .usernameParameter("nombre")
-                .passwordParameter("password")
-            )
-            .logout(logout -> logout
-                .permitAll()
-                .logoutSuccessUrl("/signin?logout")
-            )
-            .exceptionHandling(ex -> ex
-                .accessDeniedHandler(accessDeniedHandler()) // Asegúrate de tener este bean
-            );
+public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    http
+	.csrf().disable()
+	.cors().disable()
+	.headers(headers -> headers
+	    .frameOptions().sameOrigin()
+	)
+	.authorizeHttpRequests(auth -> auth
+	    .anyRequest().permitAll() // 🔓 Permite todo
+	)
+	.formLogin().disable()       // 🔒 Desactiva login
+	.logout().disable()          // 🔒 Desactiva logout
+	.exceptionHandling().disable(); // 🔒 Desactiva manejo de errores personalizados
 
-        return http.build();
-    }
+    return http.build();
+}
 
 
    
